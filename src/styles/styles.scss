@@ -1,0 +1,40 @@
+$background: #000000;
+$blackishWhite: rgba(0, 0, 0, 0.85);
+$purple: #7856e1;
+$white: #ffffff;
+$whiteishBlack: rgba(255, 255, 255, 0.2);
+$gray: #71767b;
+$grayishBlue: #16181c;
+
+@import "header";
+@import "sidebar";
+@import "maincontent";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    background-color: $background;
+}
+
+main {
+    display: flex;
+    align-items: stretch;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    background-image: url("../images/veerybirds.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: calc(100vh - 59px);
+}
+
+a {
+    text-decoration: none;
+}

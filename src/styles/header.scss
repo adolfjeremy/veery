@@ -1,0 +1,55 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 5%;
+    background-color: transparent;
+    border-bottom: 1px solid $whiteishBlack;
+
+    .searchbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $grayishBlue;
+        border-radius: 40px;
+
+        svg {
+            font-size: 26px;
+            color: $gray;
+            margin-left: 10px;
+        }
+
+        input {
+            font-size: 1rem;
+            color: $gray;
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            border-radius: 0 40px 40px 0;
+            background-color: transparent;
+        }
+    }
+
+    .auth-button-container {
+        display: flex;
+        align-items: center;
+
+        .authbutton {
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.625rem 1rem;
+            border-radius: 20px;
+        }
+
+        .login {
+            background-color: $purple;
+            margin-right: 0.9375rem;
+            color: $white;
+        }
+
+        .register {
+            background-color: $white;
+            color: $background;
+        }
+    }
+}
