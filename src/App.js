@@ -6,7 +6,7 @@ import "./styles/styles.scss";
 
 function App() {
     return (
-        <div className="AppContainer">
+        <div className="app-container">
             <Routes>
                 <Route path="/" element={<HomePage />} />
             </Routes>
