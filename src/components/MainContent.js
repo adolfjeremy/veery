@@ -1,7 +1,12 @@
 import React from "react";
+import TreadList from "./TreadList";
 
 function MainContent() {
-    return <article>main content</article>;
+    return (
+        <article>
+            <TreadList />
+        </article>
+    );
 }
 
 export default MainContent;
