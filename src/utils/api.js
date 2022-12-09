@@ -14,12 +14,23 @@ const api = (() => {
             data: { leaderboards },
         } = response.data;
         return leaderboards;
-        // const {
-        //     data: { leaderboards },
-        // } = response;
-        // return leaderboards;
     }
-    return { getLeaderboards };
+
+    async function getAllThreads() {
+        const response = await axios.get(`${BASE_URL}/threads`);
+        const { status, message } = response.data;
+
+        if (status !== "success") {
+            throw new Error(message);
+        }
+
+        const {
+            data: { threads },
+        } = response.data;
+
+        return threads;
+    }
+    return { getLeaderboards, getAllThreads };
 })();
 
 export default api;
