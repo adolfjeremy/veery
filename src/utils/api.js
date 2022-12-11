@@ -16,6 +16,19 @@ const api = (() => {
         return leaderboards;
     }
 
+    async function getAllUsers() {
+        const response = await axios.get(`${BASE_URL}/users`);
+        const { status, message } = response.data;
+
+        if (status !== "success") {
+            throw new Error(message);
+        }
+        const {
+            data: { users },
+        } = response.data;
+        return users;
+    }
+
     async function getAllThreads() {
         const response = await axios.get(`${BASE_URL}/threads`);
         const { status, message } = response.data;
@@ -30,7 +43,7 @@ const api = (() => {
 
         return threads;
     }
-    return { getLeaderboards, getAllThreads };
+    return { getLeaderboards, getAllUsers, getAllThreads };
 })();
 
 export default api;

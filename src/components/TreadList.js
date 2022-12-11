@@ -1,18 +1,20 @@
 import React from "react";
-import ThreadItem from "./ThreadItem";
+import PropTypes from "prop-types";
+import ThreadItem, { threadItemShape } from "./ThreadItem";
 
-function TreadList() {
+function TreadList({ threads }) {
     return (
         <div className="thread">
-            <ThreadItem />
-            <ThreadItem />
-            <ThreadItem />
-            <ThreadItem />
-            <ThreadItem />
-            <ThreadItem />
-            <ThreadItem />
+            {threads.map((thread) => (
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                <ThreadItem {...thread} key={thread.id} />
+            ))}
         </div>
     );
 }
+
+TreadList.propTypes = {
+    threads: PropTypes.arrayOf(PropTypes.shape(threadItemShape)).isRequired,
+};
 
 export default TreadList;

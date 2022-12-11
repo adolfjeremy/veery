@@ -16,9 +16,14 @@ article {
             flex-basis: 0;
             flex-grow: 1;
             margin: 1px 0;
+            color: $white;
             border: 1px solid $whiteishBlack;
             border-radius: 15px;
             background-color: $grayishBlue;
+            width: 100%;
+            &:hover {
+                background-color: $grayishBlueHover;
+            }
 
             &-vote {
                 display: flex;
@@ -36,10 +41,10 @@ article {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 36px;
+                        font-size: 30px;
                         color: $white;
-                        width: 50px;
-                        height: 50px;
+                        width: 35px;
+                        height: 35px;
                         border: none;
                         outline: none;
                         border-radius: 50%;
@@ -57,7 +62,7 @@ article {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                padding: 1.25rem 1.125rem;
+                padding: 1.25rem 1.125rem 0.625rem;
 
                 &__header {
                     h3 {

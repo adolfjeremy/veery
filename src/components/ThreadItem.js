@@ -1,15 +1,30 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import parse from "html-react-parser";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { TfiComment } from "react-icons/tfi";
 import VoteButton from "./VoteButton";
+import postedAt from "../utils";
 
-function ThreadItem() {
+function ThreadItem({
+    id,
+    title,
+    body,
+    category,
+    createdAt,
+    upVotesBy,
+    downVotesBy,
+    totalComments,
+    user,
+}) {
+    // eslint-disable-next-line no-console
+    console.log(category);
     return (
-        <div className="thread-item">
+        <Link to={`/${id}`} className="thread-item">
             <div className="thread-item-vote">
                 <div className="thread-item-vote__buttons">
-                    <span>20</span>
+                    <span>{upVotesBy.length}</span>
                     <VoteButton>
                         <AiOutlineArrowUp />
                     </VoteButton>
@@ -18,32 +33,62 @@ function ThreadItem() {
                     <VoteButton>
                         <AiOutlineArrowDown />
                     </VoteButton>
-                    <span>3</span>
+                    <span>{downVotesBy.length}</span>
                 </div>
             </div>
             <div className="thread-item-content">
                 <div className="thread-item-content__header">
-                    <h3>New Patch</h3>
+                    <h3 title={title}>
+                        {parse(
+                            title.length > 50
+                                ? `${title.substring(0, 50)}...`
+                                : title
+                        )}
+                    </h3>
                     <span>
-                        posted by
-                        <strong> KlapDota </strong>
-                        at 6 December 2022
+                        {/* eslint-disable react/jsx-one-expression-per-line */}
+                        posted by <strong>{user.name}</strong>{" "}
+                        {postedAt(createdAt)}
                     </span>
                 </div>
                 <div className="thread-item-content__body">
-                    <p>
-                        People always say "give new patch" after a while, but I
-                        sometimes feel like we haven't explored even 10% of the
-                        game when shit like this happens....
-                    </p>
+                    {parse(
+                        body.length > 99 ? `${body.substring(0, 99)}...` : body
+                    )}
                 </div>
                 <div className="thread-item-content__footer">
                     <TfiComment />
-                    <span>3</span>
+                    <span>{totalComments}</span>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
+
+const usersShape = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    avatar: PropTypes.string,
+};
+
+const threadItemShape = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    ownerId: PropTypes.string.isRequired,
+    upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+    downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+    totalComments: PropTypes.number.isRequired,
+    user: PropTypes.shape(usersShape).isRequired,
+};
+
+ThreadItem.propTypes = {
+    ...threadItemShape,
+};
+
+export { threadItemShape };
 
 export default ThreadItem;

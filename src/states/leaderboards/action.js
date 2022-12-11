@@ -4,7 +4,7 @@ const ActionType = {
     SET_LEADERBOARDS: "SET_LEADERBOARDS",
 };
 
-function setLeaderbaordActionCreator(leaderboards) {
+function receiveLeaderbaordActionCreator(leaderboards) {
     return {
         type: ActionType.SET_LEADERBOARDS,
         payload: { leaderboards },
@@ -16,7 +16,7 @@ function asyncSetLeaderboard() {
         try {
             const leaderboards = await api.getLeaderboards();
 
-            dispatch(setLeaderbaordActionCreator(leaderboards));
+            dispatch(receiveLeaderbaordActionCreator(leaderboards));
         } catch (error) {
             // eslint-disable-next-line no-alert
             alert("polmed");
@@ -24,4 +24,4 @@ function asyncSetLeaderboard() {
     };
 }
 
-export { ActionType, setLeaderbaordActionCreator, asyncSetLeaderboard };
+export { ActionType, receiveLeaderbaordActionCreator, asyncSetLeaderboard };
