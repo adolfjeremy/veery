@@ -39,7 +39,7 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 59px);
 }
 
 a {
@@ -49,4 +49,41 @@ a {
 .avatar {
     width: 35px;
     border-radius: 50%;
+}
+
+.auth-input,
+.thread-input {
+    display: flex;
+    flex-direction: column;
+    button,
+    input,
+    .form_div {
+        font-size: 1.125rem;
+        color: $white;
+        border: none;
+        outline: none;
+        border-radius: 0.625rem;
+    }
+    input,
+    .form_div {
+        font-weight: 500;
+        padding: 0.625rem;
+        margin: 0 0 0.625rem;
+        background-color: $blackishWhite;
+    }
+    .form_div {
+        min-height: 100px;
+    }
+    button {
+        font-weight: 600;
+        padding: 0.625rem;
+        background-color: $purple;
+        cursor: pointer;
+    }
+}
+
+[data-placeholder]:empty:before {
+    color: $gray;
+    content: attr(data-placeholder);
+    font-size: 1.125rem;
 }

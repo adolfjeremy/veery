@@ -33,10 +33,17 @@ function HeaderBar({ authUser, signOut }) {
     );
 }
 
+const authUserShape = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+};
+
 HeaderBar.propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    authUser: PropTypes.any,
+    authUser: PropTypes.shape(authUserShape),
     signOut: PropTypes.func.isRequired,
 };
+
+export { authUserShape };
 
 export default HeaderBar;

@@ -103,6 +103,26 @@ const api = (() => {
 
         return threads;
     }
+    async function createThread({ title, body }) {
+        const { data } = await axios.post(
+            `${BASE_URL}/threads`,
+            { title, body, category: "" },
+            {
+                headers: {
+                    Authorization: `Bearer ${getAccessToken()}`,
+                },
+            }
+        );
+
+        const { status, message } = data;
+        if (status !== "success") {
+            throw new Error(message);
+        }
+        const {
+            data: { thread },
+        } = data;
+        return thread;
+    }
     return {
         putAccessToken,
         getAccessToken,
@@ -112,6 +132,7 @@ const api = (() => {
         getOwnProfile,
         getAllUsers,
         getAllThreads,
+        createThread,
     };
 })();
 

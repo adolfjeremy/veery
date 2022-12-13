@@ -28,8 +28,6 @@ function App() {
         return null;
     }
 
-    // eslint-disable-next-line no-console
-    console.log(authUser, "1");
     return (
         <div className="app-container">
             <Routes>

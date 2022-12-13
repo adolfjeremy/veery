@@ -1,11 +1,14 @@
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import HeaderBar from "../components/HeaderBar";
+import HeaderBar, { authUserShape } from "../components/HeaderBar";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
 import asyncPopulateUsersAndThreads from "../states/share/action";
+import { asyncAddThread } from "../states/threads/action";
 
 function HomePage({ authUser, signOut }) {
     const {
@@ -13,6 +16,8 @@ function HomePage({ authUser, signOut }) {
         users = [],
         threads = [],
     } = useSelector((states) => states);
+    const [searchParams] = useSearchParams();
+    const keyword = searchParams.get("query") || "";
 
     const dispatch = useDispatch();
 
@@ -20,6 +25,10 @@ function HomePage({ authUser, signOut }) {
         dispatch(asyncSetLeaderboard());
         dispatch(asyncPopulateUsersAndThreads());
     }, [dispatch]);
+
+    const onAddThread = ({ title, body }) => {
+        dispatch(asyncAddThread({ title, body }));
+    };
 
     const threadList = threads.map((thread) => ({
         ...thread,
@@ -31,17 +40,28 @@ function HomePage({ authUser, signOut }) {
             <HeaderBar authUser={authUser} signOut={signOut} />
             <main>
                 <Sidebar leaderboards={leaderboards} />
-                <MainContent threads={threadList} />
+                <MainContent
+                    addThread={onAddThread}
+                    threads={threadList.filter(
+                        (thread) =>
+                            thread.title
+                                .toLowerCase()
+                                // eslint-disable-next-line operator-linebreak
+                                .includes(keyword.toLowerCase()) ||
+                            thread.body
+                                .toLowerCase()
+                                .includes(keyword.toLowerCase())
+                        // eslint-disable-next-line function-paren-newline
+                    )}
+                />
             </main>
         </>
     );
 }
 
 HomePage.propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    authUser: PropTypes.any,
-    // eslint-disable-next-line react/forbid-prop-types
-    signOut: PropTypes.any,
+    authUser: PropTypes.shape(authUserShape),
+    signOut: PropTypes.func.isRequired,
 };
 
 export default HomePage;

@@ -20,32 +20,6 @@
                 margin-left: 0.625rem;
             }
         }
-        .auth-page__form {
-            .auth-input {
-                display: flex;
-                flex-direction: column;
-                button,
-                input {
-                    font-size: 1.125rem;
-                    color: $white;
-                    border: none;
-                    outline: none;
-                    border-radius: 0.625rem;
-                }
-                input {
-                    font-weight: 500;
-                    padding: 1rem;
-                    margin: 0 0 0.625rem;
-                    background-color: $blackishWhite;
-                }
-                button {
-                    font-weight: 600;
-                    padding: 0.875rem;
-                    background-color: $purple;
-                    cursor: pointer;
-                }
-            }
-        }
         .auth-page__register {
             margin-top: 0.625rem;
             a {

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 // import PropTypes from "prop-types";
 import { FiSearch } from "react-icons/fi";
 
 function SearchBar() {
-    const [keyword, setKeyword] = useState("");
-    const handleKeywordChange = ({ target }) => {
-        setKeyword(target.value);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const keyword = searchParams.get("query") || "";
+    const handleKeywordChange = (e) => {
+        setSearchParams({ query: e.target.value });
     };
     return (
         <div className="searchbar">
