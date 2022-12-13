@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import HeaderBar from "../components/HeaderBar";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
 import asyncPopulateUsersAndThreads from "../states/share/action";
 
-function HomePage() {
+function HomePage({ authUser, signOut }) {
     const {
-        authUser,
         leaderboards = [],
         users = [],
         threads = [],
@@ -26,12 +26,9 @@ function HomePage() {
         user: users.find((user) => user.id === thread.ownerId),
     }));
 
-    // eslint-disable-next-line no-console
-    console.log(authUser);
-
     return (
         <>
-            <HeaderBar authUser={authUser} />
+            <HeaderBar authUser={authUser} signOut={signOut} />
             <main>
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent threads={threadList} />
@@ -39,5 +36,12 @@ function HomePage() {
         </>
     );
 }
+
+HomePage.propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    authUser: PropTypes.any,
+    // eslint-disable-next-line react/forbid-prop-types
+    signOut: PropTypes.any,
+};
 
 export default HomePage;

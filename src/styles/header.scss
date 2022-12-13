@@ -55,4 +55,23 @@ header {
             color: $background;
         }
     }
+    .auth-user-info {
+        display: flex;
+        align-items: center;
+        span {
+            margin-left: 0.3125rem;
+        }
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: red;
+            text-align: center;
+            margin-left: 1rem;
+            outline: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
 }

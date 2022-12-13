@@ -39,9 +39,14 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: calc(100vh - 59px);
+    min-height: calc(100vh - 60px);
 }
 
 a {
     text-decoration: none;
+}
+
+.avatar {
+    width: 35px;
+    border-radius: 50%;
 }
