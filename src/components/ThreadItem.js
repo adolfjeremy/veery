@@ -18,10 +18,8 @@ function ThreadItem({
     totalComments,
     user,
 }) {
-    // eslint-disable-next-line no-console
-    console.log(category);
     return (
-        <Link to={`/${id}`} className="thread-item">
+        <Link to={`/${id}`} className="thread-item" id={category}>
             <div className="thread-item-vote">
                 <div className="thread-item-vote__buttons">
                     <span>{upVotesBy.length}</span>

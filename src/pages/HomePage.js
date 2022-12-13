@@ -4,11 +4,11 @@ import HeaderBar from "../components/HeaderBar";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
-// import { asyncReceiveThreads } from "../states/threads/action";
 import asyncPopulateUsersAndThreads from "../states/share/action";
 
 function HomePage() {
     const {
+        authUser,
         leaderboards = [],
         users = [],
         threads = [],
@@ -26,9 +26,12 @@ function HomePage() {
         user: users.find((user) => user.id === thread.ownerId),
     }));
 
+    // eslint-disable-next-line no-console
+    console.log(authUser);
+
     return (
         <>
-            <HeaderBar />
+            <HeaderBar authUser={authUser} />
             <main>
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent threads={threadList} />

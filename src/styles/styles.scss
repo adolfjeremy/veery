@@ -10,11 +10,16 @@ $grayishBlueHover: rgba(22, 24, 28, 0.95);
 @import "header";
 @import "sidebar";
 @import "maincontent";
+@import "authpage";
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    height: 100%;
 }
 
 body {
@@ -30,10 +35,6 @@ body {
 
 main {
     display: flex;
-    align-items: stretch;
-    flex-basis: auto;
-    flex-grow: 1;
-    flex-shrink: 0;
     background-image: url("../images/veerybirds.png");
     background-size: cover;
     background-repeat: no-repeat;
