@@ -17,24 +17,30 @@ function ThreadItem({
     downVotesBy,
     totalComments,
     user,
+    upVote,
+    downVote,
 }) {
+    const handleUpvote = (event) => {
+        event.stopPropagation();
+        upVote(id);
+    };
     return (
-        <Link to={`/${id}`} className="thread-item" id={category}>
+        <div className="thread-item" id={category}>
             <div className="thread-item-vote">
                 <div className="thread-item-vote__buttons">
                     <span>{upVotesBy.length}</span>
-                    <VoteButton>
+                    <button type="button" onClick={handleUpvote}>
                         <AiOutlineArrowUp />
-                    </VoteButton>
+                    </button>
                 </div>
                 <div className="thread-item-vote__buttons">
-                    <VoteButton>
+                    <VoteButton handleOnClick={downVote}>
                         <AiOutlineArrowDown />
                     </VoteButton>
                     <span>{downVotesBy.length}</span>
                 </div>
             </div>
-            <div className="thread-item-content">
+            <Link to={`/${id}`} className="thread-item-content">
                 <div className="thread-item-content__header">
                     <h3 title={title}>
                         {parse(
@@ -58,8 +64,8 @@ function ThreadItem({
                     <TfiComment />
                     <span>{totalComments}</span>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     );
 }
 
@@ -85,6 +91,8 @@ const threadItemShape = {
 
 ThreadItem.propTypes = {
     ...threadItemShape,
+    upVote: PropTypes.func.isRequired,
+    downVote: PropTypes.func.isRequired,
 };
 
 export { threadItemShape };

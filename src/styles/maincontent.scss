@@ -63,6 +63,7 @@ article {
                         border-radius: 50%;
                         background-color: transparent;
                         cursor: pointer;
+                        position: relative;
                         &:hover {
                             background-color: $purple;
                             transition: 100ms ease-in-out;

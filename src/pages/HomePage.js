@@ -8,7 +8,7 @@ import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
 import asyncPopulateUsersAndThreads from "../states/share/action";
-import { asyncAddThread } from "../states/threads/action";
+import { asyncAddThread, asyncUpVoteThread } from "../states/threads/action";
 
 function HomePage({ authUser, signOut }) {
     const {
@@ -30,6 +30,11 @@ function HomePage({ authUser, signOut }) {
         dispatch(asyncAddThread({ title, body }));
     };
 
+    const onUpVote = (id) => {
+        dispatch(asyncUpVoteThread(id));
+    };
+    const onDownVote = () => "";
+
     const threadList = threads.map((thread) => ({
         ...thread,
         user: users.find((user) => user.id === thread.ownerId),
@@ -41,7 +46,10 @@ function HomePage({ authUser, signOut }) {
             <main>
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent
+                    authUser={authUser}
                     addThread={onAddThread}
+                    upVote={onUpVote}
+                    downVote={onDownVote}
                     threads={threadList.filter(
                         (thread) =>
                             thread.title

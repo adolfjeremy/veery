@@ -123,6 +123,62 @@ const api = (() => {
         } = data;
         return thread;
     }
+    async function upVoteThread(id) {
+        const { data } = await axios.post(
+            `${BASE_URL}/threads/${id}/up-vote`,
+            { id },
+            {
+                headers: { Authorization: `Bearer ${getAccessToken()}` },
+            }
+        );
+
+        const { status, message } = data;
+        if (status !== "success") {
+            throw new Error(message);
+        }
+        const {
+            data: { vote },
+        } = data;
+        return vote;
+    }
+    async function downVoteThread({ id }) {
+        const { data } = await axios.post(
+            `${BASE_URL}/threads/${id}/down-vote`,
+            {
+                headers: {
+                    Authorization: `Bearer ${getAccessToken()}`,
+                },
+            }
+        );
+
+        const { status, message } = data;
+        if (status !== "success") {
+            throw new Error(message);
+        }
+        const {
+            data: { vote },
+        } = data;
+        return vote;
+    }
+    async function neutralizeVoteThread({ id }) {
+        const { data } = await axios.post(
+            `${BASE_URL}/threads/${id}/neutral-vote`,
+            {
+                headers: {
+                    Authorization: `Bearer ${getAccessToken()}`,
+                },
+            }
+        );
+
+        const { status, message } = data;
+        if (status !== "success") {
+            throw new Error(message);
+        }
+        const {
+            data: { vote },
+        } = data;
+        return vote;
+    }
     return {
         putAccessToken,
         getAccessToken,
@@ -133,6 +189,9 @@ const api = (() => {
         getAllUsers,
         getAllThreads,
         createThread,
+        upVoteThread,
+        downVoteThread,
+        neutralizeVoteThread,
     };
 })();
 

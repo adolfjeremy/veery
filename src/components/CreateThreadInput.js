@@ -2,8 +2,9 @@
 /* eslint-disable react/jsx-closing-tag-location */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { authUserShape } from "./HeaderBar";
 
-function RegisterInput({ addThread }) {
+function RegisterInput({ authUser, addThread }) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const onHandleAddThread = () => {
@@ -18,17 +19,22 @@ function RegisterInput({ addThread }) {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Title"
+                placeholder="title"
                 required
             />
-            <div
-                className="form_div"
-                data-placeholder="body"
-                contentEditable
-                onInput={(e) => setBody(e.target.innerHTML)}
+            <textarea
+                type="text"
                 value={body}
-            ></div>
-            <button type="button" onClick={onHandleAddThread}>
+                onChange={(e) => setBody(e.target.value)}
+                placeholder="body"
+                required
+            />
+            <button
+                type="button"
+                onClick={onHandleAddThread}
+                // eslint-disable-next-line no-unneeded-ternary
+                disabled={authUser === null ? true : false}
+            >
                 Post
             </button>
         </form>
@@ -36,6 +42,7 @@ function RegisterInput({ addThread }) {
 }
 
 RegisterInput.propTypes = {
+    authUser: PropTypes.shape(authUserShape),
     addThread: PropTypes.func.isRequired,
 };
 
