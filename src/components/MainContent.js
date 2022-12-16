@@ -1,16 +1,29 @@
 /* eslint-disable object-curly-newline */
 import React from "react";
 import PropTypes from "prop-types";
-import TreadList from "./TreadList";
+import ThreadList from "./ThreadList";
 import { threadItemShape } from "./ThreadItem";
 import CreateThreadInput from "./CreateThreadInput";
 import { authUserShape } from "./HeaderBar";
 
-function MainContent({ authUser, threads, addThread, upVote, downVote }) {
+function MainContent({
+    authUser,
+    threads,
+    addThread,
+    upVote,
+    downVote,
+    neutralizeVote,
+}) {
     return (
         <article>
             <CreateThreadInput authUser={authUser} addThread={addThread} />
-            <TreadList threads={threads} upVote={upVote} downVote={downVote} />
+            <ThreadList
+                authUser={authUser}
+                threads={threads}
+                upVote={upVote}
+                downVote={downVote}
+                neutralizeVote={neutralizeVote}
+            />
         </article>
     );
 }
@@ -21,6 +34,7 @@ MainContent.propTypes = {
     addThread: PropTypes.func.isRequired,
     upVote: PropTypes.func.isRequired,
     downVote: PropTypes.func.isRequired,
+    neutralizeVote: PropTypes.func.isRequired,
 };
 
 export default MainContent;

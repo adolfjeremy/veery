@@ -1,17 +1,19 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import parse from "html-react-parser";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { TfiComment } from "react-icons/tfi";
 import VoteButton from "./VoteButton";
 import postedAt from "../utils";
+import { authUserShape } from "./HeaderBar";
 
 function ThreadItem({
+    authUser,
     id,
     title,
     body,
-    category,
     createdAt,
     upVotesBy,
     downVotesBy,
@@ -19,28 +21,72 @@ function ThreadItem({
     user,
     upVote,
     downVote,
+    neutralizeVote,
 }) {
+    const navigate = useNavigate();
+
     const handleUpvote = (event) => {
         event.stopPropagation();
         upVote(id);
     };
+    const handleDownvote = (event) => {
+        event.stopPropagation();
+        downVote(id);
+    };
+    const handleNeutralizeThreadVote = (event) => {
+        event.stopPropagation();
+        neutralizeVote(id);
+    };
+
+    const onThreadClick = () => {
+        navigate(`/threads/${id}`);
+    };
+
+    const onThreadPress = (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            navigate(`/threads/${id}`);
+        }
+    };
     return (
-        <div className="thread-item" id={category}>
+        <div className="thread-item">
             <div className="thread-item-vote">
                 <div className="thread-item-vote__buttons">
                     <span>{upVotesBy.length}</span>
-                    <button type="button" onClick={handleUpvote}>
+                    <VoteButton
+                        className={
+                            upVotesBy.includes(authUser.id) ? "voted" : ""
+                        }
+                        type="button"
+                        handleOnClick={
+                            upVotesBy.includes(authUser.id)
+                                ? handleNeutralizeThreadVote
+                                : handleUpvote
+                        }
+                    >
                         <AiOutlineArrowUp />
-                    </button>
+                    </VoteButton>
                 </div>
                 <div className="thread-item-vote__buttons">
-                    <VoteButton handleOnClick={downVote}>
+                    <VoteButton
+                        className={
+                            downVotesBy.includes(authUser.id) ? "voted" : ""
+                        }
+                        handleOnClick={
+                            downVotesBy.includes(authUser.id)
+                                ? handleNeutralizeThreadVote
+                                : handleDownvote
+                        }
+                    >
                         <AiOutlineArrowDown />
                     </VoteButton>
                     <span>{downVotesBy.length}</span>
                 </div>
             </div>
-            <Link to={`/${id}`} className="thread-item-content">
+            <div
+                className="thread-item-content"
+                onClick={onThreadClick}
+                onKeyDown={onThreadPress}
+            >
                 <div className="thread-item-content__header">
                     <h3 title={title}>
                         {parse(
@@ -64,7 +110,7 @@ function ThreadItem({
                     <TfiComment />
                     <span>{totalComments}</span>
                 </div>
-            </Link>
+            </div>
         </div>
     );
 }
@@ -80,7 +126,6 @@ const threadItemShape = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     ownerId: PropTypes.string.isRequired,
     upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -90,9 +135,11 @@ const threadItemShape = {
 };
 
 ThreadItem.propTypes = {
+    authUser: PropTypes.shape(authUserShape),
     ...threadItemShape,
     upVote: PropTypes.func.isRequired,
     downVote: PropTypes.func.isRequired,
+    neutralizeVote: PropTypes.func.isRequired,
 };
 
 export { threadItemShape };

@@ -141,13 +141,12 @@ const api = (() => {
         } = data;
         return vote;
     }
-    async function downVoteThread({ id }) {
+    async function downVoteThread(id) {
         const { data } = await axios.post(
             `${BASE_URL}/threads/${id}/down-vote`,
+            { id },
             {
-                headers: {
-                    Authorization: `Bearer ${getAccessToken()}`,
-                },
+                headers: { Authorization: `Bearer ${getAccessToken()}` },
             }
         );
 
@@ -160,13 +159,13 @@ const api = (() => {
         } = data;
         return vote;
     }
-    async function neutralizeVoteThread({ id }) {
+
+    async function neutralizeVoteThread(id) {
         const { data } = await axios.post(
             `${BASE_URL}/threads/${id}/neutral-vote`,
+            { id },
             {
-                headers: {
-                    Authorization: `Bearer ${getAccessToken()}`,
-                },
+                headers: { Authorization: `Bearer ${getAccessToken()}` },
             }
         );
 
@@ -179,6 +178,7 @@ const api = (() => {
         } = data;
         return vote;
     }
+
     return {
         putAccessToken,
         getAccessToken,

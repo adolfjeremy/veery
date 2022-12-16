@@ -36,6 +36,26 @@ function upVoteThreadActionCreator({ id, userId }) {
     };
 }
 
+function downVoteThreadActionCreator({ id, userId }) {
+    return {
+        type: ActionType.DOWN_VOTE_THREAD,
+        payload: {
+            id,
+            userId,
+        },
+    };
+}
+
+function neutralizeVoteThreadActionCreator({ id, userId }) {
+    return {
+        type: ActionType.NEUTRALIZE_VOTE_THREAD,
+        payload: {
+            id,
+            userId,
+        },
+    };
+}
+
 function asyncUpVoteThread(id) {
     return async (dispatch, getState) => {
         const { authUser } = getState();
@@ -46,6 +66,38 @@ function asyncUpVoteThread(id) {
             // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(upVoteThreadActionCreator({ id, userId: authUser.id }));
+        }
+    };
+}
+
+function asyncDownVoteThread(id) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(downVoteThreadActionCreator({ id, userId: authUser.id }));
+        try {
+            await api.downVoteThread(id);
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+            dispatch(downVoteThreadActionCreator({ id, userId: authUser.id }));
+        }
+    };
+}
+
+function asyncNeutralizeVoteThread(id) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(
+            neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
+        );
+        try {
+            await api.neutralizeVoteThread(id);
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+            dispatch(
+                neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
+            );
         }
     };
 }
@@ -79,7 +131,11 @@ export {
     receiveThreadsActionCreator,
     addThreadActionCreator,
     upVoteThreadActionCreator,
+    downVoteThreadActionCreator,
+    neutralizeVoteThreadActionCreator,
     asyncReceiveThreads,
     asyncAddThread,
     asyncUpVoteThread,
+    asyncDownVoteThread,
+    asyncNeutralizeVoteThread,
 };

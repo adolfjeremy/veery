@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function VoteButton({ children, handleOnClick }) {
+function VoteButton({ children, handleOnClick, className }) {
     return (
-        <button type="button" onClick={handleOnClick}>
+        <button className={className} type="button" onClick={handleOnClick}>
             {children}
         </button>
     );
@@ -13,6 +13,7 @@ VoteButton.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     children: PropTypes.any,
     handleOnClick: PropTypes.func.isRequired,
+    className: PropTypes.string,
 };
 
 export default VoteButton;

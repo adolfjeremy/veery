@@ -45,6 +45,9 @@ article {
                 justify-content: center;
                 border-right: 1px solid $whiteishBlack;
                 padding: 1.25rem 1.125rem;
+                .voted {
+                    background-color: $purple;
+                }
 
                 &__buttons {
                     display: flex;
@@ -77,6 +80,8 @@ article {
                 flex-direction: column;
                 justify-content: space-between;
                 padding: 1.25rem 1.125rem 0.625rem;
+                width: 100%;
+                cursor: pointer;
 
                 &__header {
                     h3 {

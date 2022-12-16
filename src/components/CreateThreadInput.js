@@ -20,14 +20,12 @@ function RegisterInput({ authUser, addThread }) {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="title"
-                required
             />
             <textarea
                 type="text"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 placeholder="body"
-                required
             />
             <button
                 type="button"
