@@ -49,39 +49,58 @@ function ThreadItem({
     };
     return (
         <div className="thread-item">
-            <div className="thread-item-vote">
-                <div className="thread-item-vote__buttons">
-                    <span>{upVotesBy.length}</span>
-                    <VoteButton
-                        className={
-                            upVotesBy.includes(authUser.id) ? "voted" : ""
-                        }
-                        type="button"
-                        handleOnClick={
-                            upVotesBy.includes(authUser.id)
-                                ? handleNeutralizeThreadVote
-                                : handleUpvote
-                        }
-                    >
-                        <AiOutlineArrowUp />
-                    </VoteButton>
+            {authUser === null ? (
+                <div className="thread-item-vote">
+                    <div className="thread-item-vote__buttons">
+                        <span>{upVotesBy.length}</span>
+                        <VoteButton>
+                            <AiOutlineArrowUp />
+                        </VoteButton>
+                    </div>
+                    <div className="thread-item-vote__buttons">
+                        <VoteButton>
+                            <AiOutlineArrowDown />
+                        </VoteButton>
+                        <span>{downVotesBy.length}</span>
+                    </div>
                 </div>
-                <div className="thread-item-vote__buttons">
-                    <VoteButton
-                        className={
-                            downVotesBy.includes(authUser.id) ? "voted" : ""
-                        }
-                        handleOnClick={
-                            downVotesBy.includes(authUser.id)
-                                ? handleNeutralizeThreadVote
-                                : handleDownvote
-                        }
-                    >
-                        <AiOutlineArrowDown />
-                    </VoteButton>
-                    <span>{downVotesBy.length}</span>
+            ) : (
+                <div className="thread-item-vote">
+                    <div className="thread-item-vote__buttons">
+                        <span>{upVotesBy.length}</span>
+                        <VoteButton
+                            className={
+                                upVotesBy?.includes(authUser.id) ? "voted" : ""
+                            }
+                            type="button"
+                            handleOnClick={
+                                upVotesBy.includes(authUser.id)
+                                    ? handleNeutralizeThreadVote
+                                    : handleUpvote
+                            }
+                        >
+                            <AiOutlineArrowUp />
+                        </VoteButton>
+                    </div>
+                    <div className="thread-item-vote__buttons">
+                        <VoteButton
+                            className={
+                                downVotesBy?.includes(authUser.id)
+                                    ? "voted"
+                                    : ""
+                            }
+                            handleOnClick={
+                                downVotesBy.includes(authUser.id)
+                                    ? handleNeutralizeThreadVote
+                                    : handleDownvote
+                            }
+                        >
+                            <AiOutlineArrowDown />
+                        </VoteButton>
+                        <span>{downVotesBy.length}</span>
+                    </div>
                 </div>
-            </div>
+            )}
             <div
                 className="thread-item-content"
                 onClick={onThreadClick}

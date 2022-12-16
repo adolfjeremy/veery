@@ -1,9 +1,9 @@
-/* eslint-disable object-curly-newline */
 import React from "react";
 import PropTypes from "prop-types";
 import ThreadItem, { threadItemShape } from "./ThreadItem";
 import { authUserShape } from "./HeaderBar";
 
+// eslint-disable-next-line object-curly-newline
 function ThreadList({ authUser, threads, upVote, downVote, neutralizeVote }) {
     if (!threads.length) {
         return <div className="thread">no thread found</div>;

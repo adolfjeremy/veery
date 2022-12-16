@@ -12,7 +12,7 @@ function VoteButton({ children, handleOnClick, className }) {
 VoteButton.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     children: PropTypes.any,
-    handleOnClick: PropTypes.func.isRequired,
+    handleOnClick: PropTypes.func,
     className: PropTypes.string,
 };
 

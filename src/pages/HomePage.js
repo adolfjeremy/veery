@@ -1,4 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +5,8 @@ import PropTypes from "prop-types";
 import HeaderBar, { authUserShape } from "../components/HeaderBar";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
+import CreateThreadInput from "../components/CreateThreadInput";
+import ThreadList from "../components/ThreadList";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
 import asyncPopulateUsersAndThreads from "../states/share/action";
 import {
@@ -55,24 +56,30 @@ function HomePage({ authUser, signOut }) {
             <HeaderBar authUser={authUser} signOut={signOut} />
             <main>
                 <Sidebar leaderboards={leaderboards} />
-                <MainContent
-                    authUser={authUser}
-                    addThread={onAddThread}
-                    upVote={onUpVote}
-                    downVote={onDownVote}
-                    neutralizeVote={onNeutralizeVote}
-                    threads={threadList.filter(
-                        (thread) =>
-                            thread.title
-                                .toLowerCase()
-                                // eslint-disable-next-line operator-linebreak
-                                .includes(keyword.toLowerCase()) ||
-                            thread.body
-                                .toLowerCase()
-                                .includes(keyword.toLowerCase())
-                        // eslint-disable-next-line function-paren-newline
-                    )}
-                />
+                <MainContent>
+                    <CreateThreadInput
+                        authUser={authUser}
+                        addThread={onAddThread}
+                    />
+                    <ThreadList
+                        authUser={authUser}
+                        upVote={onUpVote}
+                        downVote={onDownVote}
+                        neutralizeVote={onNeutralizeVote}
+                        threads={threadList.filter(
+                            (thread) =>
+                                // eslint-disable-next-line implicit-arrow-linebreak
+                                thread.title
+                                    .toLowerCase()
+                                    // eslint-disable-next-line operator-linebreak
+                                    .includes(keyword.toLowerCase()) ||
+                                thread.body
+                                    .toLowerCase()
+                                    .includes(keyword.toLowerCase())
+                            // eslint-disable-next-line function-paren-newline
+                        )}
+                    />
+                </MainContent>
             </main>
         </>
     );
