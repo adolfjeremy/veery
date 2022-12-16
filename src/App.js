@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ThreadDetailPage from "./pages/ThreadDetailPage";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
 import { asyncPreloadProcess } from "./states/isPreload/action";
 
@@ -38,6 +39,10 @@ function App() {
                     element={
                         <HomePage authUser={authUser} signOut={onSignOut} />
                     }
+                />
+                <Route
+                    path="/threads/:id"
+                    element={<ThreadDetailPage signOut={onSignOut} />}
                 />
             </Routes>
         </div>

@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { TfiComment } from "react-icons/tfi";
 import VoteButton from "./VoteButton";
+import AvatarSmall from "./AvatarSmall";
 import postedAt from "../utils";
 import { authUserShape } from "./HeaderBar";
 
@@ -116,8 +117,8 @@ function ThreadItem({
                     </h3>
                     <span>
                         {/* eslint-disable react/jsx-one-expression-per-line */}
-                        posted by <strong>{user.name}</strong>{" "}
-                        {postedAt(createdAt)}
+                        posted by <AvatarSmall image={user.avatar} />
+                        <strong>{user.name} </strong> {postedAt(createdAt)}
                     </span>
                 </div>
                 <div className="thread-item-content__body">

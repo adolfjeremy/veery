@@ -17,7 +17,8 @@ article {
         }
     }
 
-    .thread {
+    .thread,
+    .thread-detail {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -38,43 +39,6 @@ article {
                 background-color: $grayishBlueHover;
             }
 
-            &-vote {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                border-right: 1px solid $whiteishBlack;
-                padding: 1.25rem 1.125rem;
-                .voted {
-                    background-color: $purple;
-                }
-
-                &__buttons {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    button {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 30px;
-                        color: $white;
-                        width: 35px;
-                        height: 35px;
-                        border: none;
-                        outline: none;
-                        border-radius: 50%;
-                        background-color: transparent;
-                        cursor: pointer;
-                        position: relative;
-                        &:hover {
-                            background-color: $purple;
-                            transition: 100ms ease-in-out;
-                        }
-                    }
-                }
-            }
-
             &-content {
                 display: flex;
                 flex-direction: column;
@@ -90,9 +54,13 @@ article {
                     span {
                         color: $gray;
                         font-size: 14px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
 
                         strong {
                             color: $purple;
+                            margin-right: 5px;
                         }
                     }
                 }
@@ -108,6 +76,58 @@ article {
 
                     span {
                         margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+    .thread-detail {
+        .comment-container {
+            background-color: $grayishBlue;
+            width: 100%;
+            border-radius: 15px;
+            border: 1px solid $whiteishBlack;
+            padding: 1.25rem 0;
+            h2 {
+                font-size: 1.125rem;
+                color: $gray;
+                margin: 0 0 1rem 1.125rem;
+            }
+            .comment-list {
+                display: flex;
+                flex-direction: column;
+                .comment-item {
+                    display: flex;
+                    flex-basis: 0;
+                    flex-grow: 1;
+                    margin: 1px 0;
+                    color: $white;
+                    border: 1px solid $whiteishBlack;
+                    border-left: none;
+                    border-right: none;
+                    background-color: $grayishBlue;
+                    width: 100%;
+                    &-content {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        padding: 1.25rem 1.125rem 0.625rem;
+                        width: 100%;
+                        cursor: pointer;
+                        &__header {
+                            display: flex;
+                            align-items: center;
+                            span {
+                                margin-left: 5px;
+                                color: $gray;
+                                font-size: 0.875rem;
+                            }
+
+                            .username {
+                                color: $purple;
+                                font-weight: 600;
+                            }
+                        }
                     }
                 }
             }

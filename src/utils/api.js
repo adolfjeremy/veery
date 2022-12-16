@@ -179,6 +179,21 @@ const api = (() => {
         return vote;
     }
 
+    async function getThreadDetail(id) {
+        const { data } = await axios.get(`${BASE_URL}/threads/${id}`);
+        const { status, message } = data;
+
+        if (status !== "success") {
+            throw new Error(message);
+        }
+
+        const {
+            data: { detailThread },
+        } = data;
+
+        return detailThread;
+    }
+
     return {
         putAccessToken,
         getAccessToken,
@@ -192,6 +207,7 @@ const api = (() => {
         upVoteThread,
         downVoteThread,
         neutralizeVoteThread,
+        getThreadDetail,
     };
 })();
 

@@ -56,6 +56,30 @@ function neutralizeVoteThreadActionCreator({ id, userId }) {
     };
 }
 
+function asyncReceiveThreads() {
+    return async (dispatch) => {
+        try {
+            const threads = await api.getAllThreads();
+            dispatch(receiveThreadsActionCreator(threads));
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert("polmed");
+        }
+    };
+}
+
+function asyncAddThread({ title, body }) {
+    return async (dispatch) => {
+        try {
+            const thread = await api.createThread({ title, body });
+            dispatch(addThreadActionCreator(thread));
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+        }
+    };
+}
+
 function asyncUpVoteThread(id) {
     return async (dispatch, getState) => {
         const { authUser } = getState();
@@ -98,30 +122,6 @@ function asyncNeutralizeVoteThread(id) {
             dispatch(
                 neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
             );
-        }
-    };
-}
-
-function asyncReceiveThreads() {
-    return async (dispatch) => {
-        try {
-            const threads = await api.getAllThreads();
-            dispatch(receiveThreadsActionCreator(threads));
-        } catch (error) {
-            // eslint-disable-next-line no-alert
-            alert("polmed");
-        }
-    };
-}
-
-function asyncAddThread({ title, body }) {
-    return async (dispatch) => {
-        try {
-            const thread = await api.createThread({ title, body });
-            dispatch(addThreadActionCreator(thread));
-        } catch (error) {
-            // eslint-disable-next-line no-alert
-            alert(error.message);
         }
     };
 }

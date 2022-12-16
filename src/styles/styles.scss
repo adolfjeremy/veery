@@ -51,6 +51,12 @@ a {
     border-radius: 50%;
 }
 
+.avatar-sm {
+    width: 20px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
 .auth-input,
 .thread-input {
     display: flex;
@@ -80,5 +86,42 @@ a {
         padding: 0.625rem;
         background-color: $purple;
         cursor: pointer;
+    }
+}
+
+.thread-item-vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid $whiteishBlack;
+    padding: 1.25rem 1.125rem;
+    .voted {
+        background-color: $purple;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: $white;
+            width: 35px;
+            height: 35px;
+            border: none;
+            outline: none;
+            border-radius: 50%;
+            background-color: transparent;
+            cursor: pointer;
+            position: relative;
+            &:hover {
+                background-color: $purple;
+                transition: 100ms ease-in-out;
+            }
+        }
     }
 }
