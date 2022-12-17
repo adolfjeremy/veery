@@ -2,7 +2,6 @@
 import React from "react";
 import parse from "html-react-parser";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-import { TfiComment } from "react-icons/tfi";
 import VoteButton from "./VoteButton";
 import AvatarSmall from "./AvatarSmall";
 import postedAt from "../utils";
@@ -14,7 +13,6 @@ function ThreadDetail({
     owner,
     upVotesBy,
     downVotesBy,
-    comments,
 }) {
     return (
         <div className="thread-item">
@@ -42,10 +40,6 @@ function ThreadDetail({
                     </span>
                 </div>
                 <div className="thread-item-content__body">{parse(body)}</div>
-                <div className="thread-item-content__footer">
-                    <TfiComment />
-                    <span>{Object.keys(comments).length}</span>
-                </div>
             </div>
         </div>
     );

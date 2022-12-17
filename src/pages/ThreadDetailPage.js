@@ -1,5 +1,5 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-console */
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,7 +24,6 @@ function ThreadDetailPage({ signOut }) {
         dispatch(asyncSetLeaderboard());
         dispatch(asyncReceiveThreadDetail(id));
     }, [id, dispatch]);
-    console.log(threadDetail);
     if (!threadDetail) {
         return null;
     }
@@ -36,7 +35,14 @@ function ThreadDetailPage({ signOut }) {
                 <MainContent>
                     <div className="thread-detail">
                         <ThreadDetail {...threadDetail} />
-                        <Comment />
+                        {threadDetail.comments &&
+                            threadDetail.comments.map((comment) => (
+                                <Comment
+                                    {...comment}
+                                    commentCount={threadDetail.comments.length}
+                                    key={comment.id}
+                                />
+                            ))}
                     </div>
                 </MainContent>
             </main>
