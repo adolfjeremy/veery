@@ -29,6 +29,12 @@ body {
     color: $white;
 }
 
+[data-placeholder]:empty:before {
+    color: $gray;
+    content: attr(data-placeholder);
+    font-size: 1.125rem;
+}
+
 .app-container {
     position: relative;
 }

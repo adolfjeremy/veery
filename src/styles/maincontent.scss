@@ -82,6 +82,37 @@ article {
         }
     }
     .thread-detail {
+        .create-comment-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.125rem 0.625rem;
+            width: 100%;
+            border-radius: 15px;
+            border: 1px solid $whiteishBlack;
+            background-color: $grayishBlue;
+            gap: 15px;
+            .form-div {
+                font-size: 1rem;
+                width: 100%;
+                min-height: 100px;
+                border-radius: 15px;
+                border: 1px solid $whiteishBlack;
+                padding: 10px;
+                background-color: $grayishBlue;
+            }
+            button {
+                font-weight: 600;
+                font-size: 1rem;
+                color: $white;
+                background-color: $purple;
+                border-radius: 20px;
+                width: 100%;
+                border: none;
+                padding: 0.625rem;
+            }
+        }
         .comment-container {
             background-color: $grayishBlue;
             width: 100%;

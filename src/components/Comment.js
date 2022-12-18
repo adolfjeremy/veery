@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from "react";
 import PropTypes from "prop-types";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import VoteButton from "./VoteButton";
 import Avatar from "./Avatar";
@@ -35,7 +35,7 @@ function Comment({ content, createdAt, owner, commentCount }) {
                             <span>{postedAt(createdAt)}</span>
                         </div>
                         <div className="comment-item-content__body">
-                            {parse(content)}
+                            {content}
                         </div>
                     </div>
                 </div>

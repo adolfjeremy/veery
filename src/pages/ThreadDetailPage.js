@@ -8,9 +8,13 @@ import HeaderBar from "../components/HeaderBar";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import ThreadDetail from "../components/ThreadDetail";
+import CreateComment from "../components/CreateComment";
 import Comment from "../components/Comment";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
-import { asyncReceiveThreadDetail } from "../states/threadDetail/action";
+import {
+    asyncReceiveThreadDetail,
+    asyncAddComment,
+} from "../states/threadDetail/action";
 
 function ThreadDetailPage({ signOut }) {
     const { id } = useParams();
@@ -24,6 +28,11 @@ function ThreadDetailPage({ signOut }) {
         dispatch(asyncSetLeaderboard());
         dispatch(asyncReceiveThreadDetail(id));
     }, [id, dispatch]);
+
+    const addComment = ({ threadId, content }) => {
+        dispatch(asyncAddComment({ threadId, content }));
+    };
+
     if (!threadDetail) {
         return null;
     }
@@ -35,6 +44,12 @@ function ThreadDetailPage({ signOut }) {
                 <MainContent>
                     <div className="thread-detail">
                         <ThreadDetail {...threadDetail} />
+                        {authUser !== null && (
+                            <CreateComment
+                                threadId={threadDetail.id}
+                                addComment={addComment}
+                            />
+                        )}
                         {threadDetail.comments &&
                             threadDetail.comments.map((comment) => (
                                 <Comment

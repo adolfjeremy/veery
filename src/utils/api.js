@@ -194,6 +194,25 @@ const api = (() => {
         return detailThread;
     }
 
+    async function addComment({ threadId, content }) {
+        const { data } = await axios.post(
+            `${BASE_URL}/threads/${threadId}/comments`,
+            { content },
+            {
+                headers: { Authorization: `Bearer ${getAccessToken()}` },
+            }
+        );
+
+        const { status, message } = data;
+        if (status !== "success") {
+            throw new Error(message);
+        }
+        const {
+            data: { comment },
+        } = data;
+        return comment;
+    }
+
     return {
         putAccessToken,
         getAccessToken,
@@ -208,6 +227,7 @@ const api = (() => {
         downVoteThread,
         neutralizeVoteThread,
         getThreadDetail,
+        addComment,
     };
 })();
 
