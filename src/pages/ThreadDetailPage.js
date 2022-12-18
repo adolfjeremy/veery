@@ -50,14 +50,9 @@ function ThreadDetailPage({ signOut }) {
                                 addComment={addComment}
                             />
                         )}
-                        {threadDetail.comments &&
-                            threadDetail.comments.map((comment) => (
-                                <Comment
-                                    {...comment}
-                                    commentCount={threadDetail.comments.length}
-                                    key={comment.id}
-                                />
-                            ))}
+                        {threadDetail.comments && (
+                            <Comment comments={threadDetail.comments} />
+                        )}
                     </div>
                 </MainContent>
             </main>

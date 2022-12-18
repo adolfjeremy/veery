@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-// import parse from "html-react-parser";
+import parse from "html-react-parser";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import VoteButton from "./VoteButton";
 import AvatarSmall from "./AvatarSmall";
@@ -32,14 +32,14 @@ function ThreadDetail({
             </div>
             <div className="thread-item-content">
                 <div className="thread-item-content__header">
-                    <h3 title={title}>{title}</h3>
+                    <h3>{title}</h3>
                     <span>
                         {/* eslint-disable react/jsx-one-expression-per-line */}
                         posted by <AvatarSmall image={owner.avatar} />
                         <strong>{owner.name} </strong> {postedAt(createdAt)}
                     </span>
                 </div>
-                <div className="thread-item-content__body">{body}</div>
+                <div className="thread-item-content__body">{parse(body)}</div>
             </div>
         </div>
     );
