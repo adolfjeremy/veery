@@ -17,6 +17,7 @@ import {
     asyncAddComment,
     asyncUpVoteComment,
     asyncDownVoteComment,
+    asyncNeutralizeVoteComment,
 } from "../states/threadDetail/action";
 
 function ThreadDetailPage({ signOut }) {
@@ -44,12 +45,13 @@ function ThreadDetailPage({ signOut }) {
         dispatch(asyncDownVoteComment({ threadId, commentId }));
     };
 
+    const neutralizeVotesComment = ({ threadId, commentId }) => {
+        dispatch(asyncNeutralizeVoteComment({ threadId, commentId }));
+    };
+
     if (!threadDetail) {
         return null;
     }
-
-    // // eslint-disable-next-line no-console
-    // console.log(threadDetail);
     return (
         <>
             <HeaderBar authUser={authUser} signOut={signOut} />
@@ -73,6 +75,10 @@ function ThreadDetailPage({ signOut }) {
                                         comment={comment}
                                         upVotesComment={upVotesComment}
                                         downVotesComment={downVotesComment}
+                                        authUser={authUser}
+                                        neutralizeVotesComment={
+                                            neutralizeVotesComment
+                                        }
                                         key={comment.id}
                                     />
                                 ))}

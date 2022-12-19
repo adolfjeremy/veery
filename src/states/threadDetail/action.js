@@ -6,6 +6,7 @@ const ActionType = {
     ADD_COMMENT: "ADD_COMMENT",
     UP_VOTE_COMMENT: "UP_VOTE_COMMENT",
     DOWN_VOTE_COMMENT: "DOWN_VOTE_COMMENT",
+    NEUTRALIZE_VOTE_COMMENT: "NEUTRALIZE_VOTE_COMMENT",
 };
 
 function receiveThreadDetailActionCreator(threadDetail) {
@@ -44,6 +45,17 @@ function upVoteCommentActionCreator({ threadId, commentId, userId }) {
 function downVoteCommentActionCreator({ threadId, commentId, userId }) {
     return {
         type: ActionType.DOWN_VOTE_COMMENT,
+        payload: {
+            threadId,
+            commentId,
+            userId,
+        },
+    };
+}
+
+function neutralizeVoteCommentActioCreator({ threadId, commentId, userId }) {
+    return {
+        type: ActionType.NEUTRALIZE_VOTE_COMMENT,
         payload: {
             threadId,
             commentId,
@@ -115,6 +127,25 @@ function asyncDownVoteComment({ threadId, commentId }) {
     };
 }
 
+function asyncNeutralizeVoteComment({ threadId, commentId }) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(
+            neutralizeVoteCommentActioCreator({
+                threadId,
+                commentId,
+                userId: authUser.id,
+            })
+        );
+        try {
+            await api.nuetralizeVoteComment({ threadId, commentId });
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+        }
+    };
+}
+
 export {
     ActionType,
     receiveThreadDetailActionCreator,
@@ -122,8 +153,10 @@ export {
     addCommentActionCreator,
     upVoteCommentActionCreator,
     downVoteCommentActionCreator,
+    neutralizeVoteCommentActioCreator,
     asyncReceiveThreadDetail,
     asyncAddComment,
     asyncUpVoteComment,
     asyncDownVoteComment,
+    asyncNeutralizeVoteComment,
 };
