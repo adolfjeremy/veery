@@ -36,6 +36,32 @@ function threadDetailReducer(threadDetail = null, action = {}) {
                     return comment;
                 }),
             };
+        case ActionType.DOWN_VOTE_COMMENT:
+            return {
+                ...threadDetail,
+                comments: threadDetail.comments.map((comment) => {
+                    if (comment.id === action.payload.commentId) {
+                        return {
+                            ...comment,
+                            upVotesBy: comment.upVotesBy.includes(
+                                action.payload.userId
+                            )
+                                ? comment.upVotesBy.filter(
+                                      (id) => id !== action.payload.userId
+                                  )
+                                : comment.upVotesBy,
+                            downVotesBy: comment.downVotesBy.includes(
+                                action.payload.userId
+                            )
+                                ? comment.downVotesBy
+                                : comment.downVotesBy.concat([
+                                      action.payload.userId,
+                                  ]),
+                        };
+                    }
+                    return comment;
+                }),
+            };
         default:
             return threadDetail;
     }

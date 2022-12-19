@@ -16,6 +16,7 @@ import {
     asyncReceiveThreadDetail,
     asyncAddComment,
     asyncUpVoteComment,
+    asyncDownVoteComment,
 } from "../states/threadDetail/action";
 
 function ThreadDetailPage({ signOut }) {
@@ -39,12 +40,16 @@ function ThreadDetailPage({ signOut }) {
         dispatch(asyncUpVoteComment({ threadId, commentId }));
     };
 
+    const downVotesComment = ({ threadId, commentId }) => {
+        dispatch(asyncDownVoteComment({ threadId, commentId }));
+    };
+
     if (!threadDetail) {
         return null;
     }
 
-    // eslint-disable-next-line no-console
-    console.log(threadDetail);
+    // // eslint-disable-next-line no-console
+    // console.log(threadDetail);
     return (
         <>
             <HeaderBar authUser={authUser} signOut={signOut} />
@@ -67,6 +72,7 @@ function ThreadDetailPage({ signOut }) {
                                         threadId={threadDetail.id}
                                         comment={comment}
                                         upVotesComment={upVotesComment}
+                                        downVotesComment={downVotesComment}
                                         key={comment.id}
                                     />
                                 ))}

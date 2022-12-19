@@ -8,9 +8,12 @@ import Avatar from "./Avatar";
 import postedAt from "../utils";
 
 // eslint-disable-next-line object-curly-newline
-function Comment({ threadId, comment, upVotesComment }) {
+function Comment({ threadId, comment, upVotesComment, downVotesComment }) {
     const handleUpVotesComment = () => {
         upVotesComment({ threadId, commentId: comment.id });
+    };
+    const handleDownVotes = () => {
+        downVotesComment({ threadId, commentId: comment.id });
     };
     return (
         <div className="comment-item" key={comment.id}>
@@ -22,10 +25,10 @@ function Comment({ threadId, comment, upVotesComment }) {
                     </VoteButton>
                 </div>
                 <div className="thread-item-vote__buttons">
-                    <VoteButton>
+                    <VoteButton handleOnClick={handleDownVotes}>
                         <AiOutlineArrowDown />
                     </VoteButton>
-                    <span>{comment.donwVotesBy}</span>
+                    <span>{comment.downVotesBy.length}</span>
                 </div>
             </div>
             <div className="comment-item-content">
@@ -59,6 +62,7 @@ Comment.propTypes = {
     threadId: PropTypes.string.isRequired,
     comment: PropTypes.shape(commentsShape),
     upVotesComment: PropTypes.func.isRequired,
+    downVotesComment: PropTypes.func.isRequired,
 };
 
 export default Comment;
