@@ -9,7 +9,7 @@ function CreateComment({ threadId, addComment }) {
     };
 
     return (
-        <div className="create-comment-form">
+        <form className="create-comment-form">
             <div
                 contentEditable
                 className="form-div"
@@ -20,7 +20,7 @@ function CreateComment({ threadId, addComment }) {
             <button type="button" onClick={handleAddComment}>
                 post comment
             </button>
-        </div>
+        </form>
     );
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable operator-linebreak */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from "react";
@@ -14,6 +15,7 @@ import { asyncSetLeaderboard } from "../states/leaderboards/action";
 import {
     asyncReceiveThreadDetail,
     asyncAddComment,
+    asyncUpVoteComment,
 } from "../states/threadDetail/action";
 
 function ThreadDetailPage({ signOut }) {
@@ -33,9 +35,16 @@ function ThreadDetailPage({ signOut }) {
         dispatch(asyncAddComment({ threadId, content }));
     };
 
+    const upVotesComment = ({ threadId, commentId }) => {
+        dispatch(asyncUpVoteComment({ threadId, commentId }));
+    };
+
     if (!threadDetail) {
         return null;
     }
+
+    // eslint-disable-next-line no-console
+    console.log(threadDetail);
     return (
         <>
             <HeaderBar authUser={authUser} signOut={signOut} />
@@ -50,9 +59,19 @@ function ThreadDetailPage({ signOut }) {
                                 addComment={addComment}
                             />
                         )}
-                        {threadDetail.comments && (
-                            <Comment comments={threadDetail.comments} />
-                        )}
+                        <div className="comment-container">
+                            <h2>Comment {threadDetail.comments.length}</h2>
+                            <div className="comment-list">
+                                {threadDetail.comments.map((comment) => (
+                                    <Comment
+                                        threadId={threadDetail.id}
+                                        comment={comment}
+                                        upVotesComment={upVotesComment}
+                                        key={comment.id}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </MainContent>
             </main>

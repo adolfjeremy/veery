@@ -4,6 +4,7 @@ const ActionType = {
     RECIEVE_THREAD_DETAIL: "RECIEVE_THREAD_DETAIL",
     CLEAR_THREAD_DETAIL: "CLEAR_THREAD_DETAIL",
     ADD_COMMENT: "ADD_COMMENT",
+    UP_VOTE_COMMENT: "UP_VOTE_COMMENT",
 };
 
 function receiveThreadDetailActionCreator(threadDetail) {
@@ -25,6 +26,17 @@ function addCommentActionCreator(comment) {
     return {
         type: ActionType.ADD_COMMENT,
         payload: { comment },
+    };
+}
+
+function upVoteCommentActionCreator({ threadId, commentId, userId }) {
+    return {
+        type: ActionType.UP_VOTE_COMMENT,
+        payload: {
+            threadId,
+            commentId,
+            userId,
+        },
     };
 }
 
@@ -53,11 +65,32 @@ function asyncAddComment({ threadId, content }) {
     };
 }
 
+function asyncUpVoteComment({ threadId, commentId }) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(
+            upVoteCommentActionCreator({
+                threadId,
+                commentId,
+                userId: authUser.id,
+            })
+        );
+        try {
+            await api.upVoteComment({ threadId, commentId });
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+        }
+    };
+}
+
 export {
     ActionType,
     receiveThreadDetailActionCreator,
     clearThreadDetailActionCreator,
     addCommentActionCreator,
+    upVoteCommentActionCreator,
     asyncReceiveThreadDetail,
     asyncAddComment,
+    asyncUpVoteComment,
 };

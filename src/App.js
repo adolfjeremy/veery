@@ -11,9 +11,7 @@ import { asyncPreloadProcess } from "./states/isPreload/action";
 import "./styles/styles.scss";
 
 function App() {
-    const { authUser = null, isPreload = false } = useSelector(
-        (states) => states
-    );
+    const { isPreload = false } = useSelector((states) => states);
 
     const dispatch = useDispatch();
 
@@ -34,12 +32,7 @@ function App() {
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                <Route
-                    path="/"
-                    element={
-                        <HomePage authUser={authUser} signOut={onSignOut} />
-                    }
-                />
+                <Route path="/" element={<HomePage signOut={onSignOut} />} />
                 <Route
                     path="/threads/:id"
                     element={<ThreadDetailPage signOut={onSignOut} />}

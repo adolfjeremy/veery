@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import HeaderBar, { authUserShape } from "../components/HeaderBar";
+import HeaderBar from "../components/HeaderBar";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import CreateThreadInput from "../components/CreateThreadInput";
@@ -16,8 +16,9 @@ import {
     asyncNeutralizeVoteThread,
 } from "../states/threads/action";
 
-function HomePage({ authUser, signOut }) {
+function HomePage({ signOut }) {
     const {
+        authUser = null,
         leaderboards = [],
         users = [],
         threads = [],
@@ -86,7 +87,6 @@ function HomePage({ authUser, signOut }) {
 }
 
 HomePage.propTypes = {
-    authUser: PropTypes.shape(authUserShape),
     signOut: PropTypes.func.isRequired,
 };
 

@@ -1,4 +1,4 @@
-/* eslint-disable arrow-body-style */
+/* eslint-disable indent */
 import { ActionType } from "./action";
 
 function threadDetailReducer(threadDetail = null, action = {}) {
@@ -9,6 +9,32 @@ function threadDetailReducer(threadDetail = null, action = {}) {
             return {
                 ...threadDetail,
                 comments: [action.payload.comment, ...threadDetail.comments],
+            };
+        case ActionType.UP_VOTE_COMMENT:
+            return {
+                ...threadDetail,
+                comments: threadDetail.comments.map((comment) => {
+                    if (comment.id === action.payload.commentId) {
+                        return {
+                            ...comment,
+                            downVotesBy: comment.downVotesBy.includes(
+                                action.payload.userId
+                            )
+                                ? comment.downVotesBy.filter(
+                                      (id) => id !== action.payload.userId
+                                  )
+                                : comment.downVotesBy,
+                            upVotesBy: comment.upVotesBy.includes(
+                                action.payload.userId
+                            )
+                                ? comment.upVotesBy
+                                : comment.upVotesBy.concat([
+                                      action.payload.userId,
+                                  ]),
+                        };
+                    }
+                    return comment;
+                }),
             };
         default:
             return threadDetail;
