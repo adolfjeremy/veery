@@ -67,6 +67,7 @@ article {
 
                 &__body {
                     font-size: 0.9375rem;
+                    white-space: pre-wrap;
                 }
                 &__footer {
                     font-size: 1rem;
@@ -93,8 +94,9 @@ article {
             border: 1px solid $whiteishBlack;
             background-color: $grayishBlue;
             gap: 15px;
-            .form-div {
+            textarea {
                 font-size: 1rem;
+                color: $white;
                 width: 100%;
                 min-height: 100px;
                 border-radius: 15px;
@@ -158,6 +160,9 @@ article {
                                 color: $purple;
                                 font-weight: 600;
                             }
+                        }
+                        &__body {
+                            white-space: pre-wrap;
                         }
                     }
                 }

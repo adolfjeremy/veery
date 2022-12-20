@@ -10,6 +10,57 @@ function threadDetailReducer(threadDetail = null, action = {}) {
                 ...threadDetail,
                 comments: [action.payload.comment, ...threadDetail.comments],
             };
+        case ActionType.UP_VOTE_THREAD_DETAIL:
+            return {
+                ...threadDetail,
+                upVotesBy: threadDetail.upVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? threadDetail.upVotesBy
+                    : threadDetail.upVotesBy.concat([action.payload.userId]),
+
+                downVotesBy: threadDetail.downVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? threadDetail.downVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : threadDetail.downVotesBy,
+            };
+        case ActionType.DOWN_VOTE_THREAD_DETAIL:
+            return {
+                ...threadDetail,
+                upVotesBy: threadDetail.upVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? threadDetail.upVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : threadDetail.upVotesBy,
+                downVotesBy: threadDetail.downVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? threadDetail.downVotesBy
+                    : threadDetail.downVotesBy.concat([action.payload.userId]),
+            };
+        case ActionType.NEUTRALIZE_VOTE_THREAD_DETAIL:
+            return {
+                ...threadDetail,
+                upVotesBy: threadDetail.upVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? threadDetail.upVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : threadDetail.upVotesBy,
+                downVotesBy: threadDetail.downVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? threadDetail.downVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : threadDetail.downVotesBy,
+            };
         case ActionType.UP_VOTE_COMMENT:
             return {
                 ...threadDetail,

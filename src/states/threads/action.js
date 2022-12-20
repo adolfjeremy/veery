@@ -79,7 +79,6 @@ function asyncAddThread({ title, body }) {
         }
     };
 }
-
 function asyncUpVoteThread(id) {
     return async (dispatch, getState) => {
         const { authUser } = getState();

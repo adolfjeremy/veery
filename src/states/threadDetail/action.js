@@ -3,6 +3,9 @@ import api from "../../utils/api";
 const ActionType = {
     RECIEVE_THREAD_DETAIL: "RECIEVE_THREAD_DETAIL",
     CLEAR_THREAD_DETAIL: "CLEAR_THREAD_DETAIL",
+    UP_VOTE_THREAD_DETAIL: "UP_VOTE_THREAD_DETAIL",
+    DOWN_VOTE_THREAD_DETAIL: "DOWN_VOTE_THREAD_DETAIL",
+    NEUTRALIZE_VOTE_THREAD_DETAIL: "NEUTRALIZE_VOTE_THREAD_DETAIL",
     ADD_COMMENT: "ADD_COMMENT",
     UP_VOTE_COMMENT: "UP_VOTE_COMMENT",
     DOWN_VOTE_COMMENT: "DOWN_VOTE_COMMENT",
@@ -21,6 +24,36 @@ function receiveThreadDetailActionCreator(threadDetail) {
 function clearThreadDetailActionCreator() {
     return {
         type: ActionType.CLEAR_THREAD_DETAIL,
+    };
+}
+
+function upVoteThreadDetailActionCreator({ id, userId }) {
+    return {
+        type: ActionType.UP_VOTE_THREAD_DETAIL,
+        payload: {
+            id,
+            userId,
+        },
+    };
+}
+
+function downVoteThreadDetailActionCreator({ id, userId }) {
+    return {
+        type: ActionType.DOWN_VOTE_THREAD_DETAIL,
+        payload: {
+            id,
+            userId,
+        },
+    };
+}
+
+function neutralizeVoteThreadDetailActionCreator({ id, userId }) {
+    return {
+        type: ActionType.NEUTRALIZE_VOTE_THREAD_DETAIL,
+        payload: {
+            id,
+            userId,
+        },
     };
 }
 
@@ -73,6 +106,61 @@ function asyncReceiveThreadDetail(threadId) {
         } catch (error) {
             // eslint-disable-next-line no-alert
             alert(error.message);
+        }
+    };
+}
+
+function asyncUpVoteThreadDetail(id) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(upVoteThreadDetailActionCreator({ id, userId: authUser.id }));
+        try {
+            await api.upVoteThread(id);
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+            dispatch(
+                upVoteThreadDetailActionCreator({ id, userId: authUser.id })
+            );
+        }
+    };
+}
+
+function asyncDownVoteThreadDetail(id) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(
+            downVoteThreadDetailActionCreator({ id, userId: authUser.id })
+        );
+        try {
+            await api.downVoteThread(id);
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+            dispatch(
+                downVoteThreadDetailActionCreator({ id, userId: authUser.id })
+            );
+        }
+    };
+}
+
+function asyncNeutralizeVoteThreadDetail(id) {
+    return async (dispatch, getState) => {
+        const { authUser } = getState();
+        dispatch(
+            neutralizeVoteThreadDetailActionCreator({ id, userId: authUser.id })
+        );
+        try {
+            await api.neutralizeVoteThread(id);
+        } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(error.message);
+            dispatch(
+                neutralizeVoteThreadDetailActionCreator({
+                    id,
+                    userId: authUser.id,
+                })
+            );
         }
     };
 }
@@ -150,11 +238,17 @@ export {
     ActionType,
     receiveThreadDetailActionCreator,
     clearThreadDetailActionCreator,
+    upVoteThreadDetailActionCreator,
+    downVoteThreadDetailActionCreator,
+    neutralizeVoteThreadDetailActionCreator,
     addCommentActionCreator,
     upVoteCommentActionCreator,
     downVoteCommentActionCreator,
     neutralizeVoteCommentActioCreator,
     asyncReceiveThreadDetail,
+    asyncUpVoteThreadDetail,
+    asyncDownVoteThreadDetail,
+    asyncNeutralizeVoteThreadDetail,
     asyncAddComment,
     asyncUpVoteComment,
     asyncDownVoteComment,

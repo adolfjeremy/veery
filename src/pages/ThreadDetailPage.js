@@ -14,6 +14,9 @@ import Comment from "../components/Comment";
 import { asyncSetLeaderboard } from "../states/leaderboards/action";
 import {
     asyncReceiveThreadDetail,
+    asyncUpVoteThreadDetail,
+    asyncDownVoteThreadDetail,
+    asyncNeutralizeVoteThreadDetail,
     asyncAddComment,
     asyncUpVoteComment,
     asyncDownVoteComment,
@@ -32,6 +35,16 @@ function ThreadDetailPage({ signOut }) {
         dispatch(asyncSetLeaderboard());
         dispatch(asyncReceiveThreadDetail(id));
     }, [id, dispatch]);
+
+    const onUpVote = (threadId) => {
+        dispatch(asyncUpVoteThreadDetail(threadId));
+    };
+    const onDownVote = (threadId) => {
+        dispatch(asyncDownVoteThreadDetail(threadId));
+    };
+    const onNeutralizeVote = (threadId) => {
+        dispatch(asyncNeutralizeVoteThreadDetail(threadId));
+    };
 
     const addComment = ({ threadId, content }) => {
         dispatch(asyncAddComment({ threadId, content }));
@@ -59,7 +72,13 @@ function ThreadDetailPage({ signOut }) {
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent>
                     <div className="thread-detail">
-                        <ThreadDetail {...threadDetail} />
+                        <ThreadDetail
+                            {...threadDetail}
+                            authUser={authUser}
+                            upVote={onUpVote}
+                            downVote={onDownVote}
+                            neutralizeVote={onNeutralizeVote}
+                        />
                         {authUser !== null && (
                             <CreateComment
                                 threadId={threadDetail.id}

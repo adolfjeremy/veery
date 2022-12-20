@@ -1,12 +1,11 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/jsx-closing-tag-location */
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { authUserShape } from "./HeaderBar";
+import useInput from "../hooks/useInput";
 
 function RegisterInput({ authUser, addThread }) {
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+    const [title, onTitleChange, setTitle] = useInput("");
+    const [body, onBodyChange, setBody] = useInput("");
     const onHandleAddThread = () => {
         addThread({ title, body });
         setTitle("");
@@ -18,13 +17,13 @@ function RegisterInput({ authUser, addThread }) {
             <input
                 type="text"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={onTitleChange}
                 placeholder="title"
             />
             <textarea
                 type="text"
                 value={body}
-                onChange={(e) => setBody(e.target.value)}
+                onChange={onBodyChange}
                 placeholder="body"
             />
             <button

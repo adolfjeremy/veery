@@ -26,42 +26,59 @@ function Comment({
     };
     return (
         <div className="comment-item" key={comment.id}>
-            <div className="thread-item-vote">
-                <div className="thread-item-vote__buttons">
-                    <span>{comment.upVotesBy.length}</span>
-                    <VoteButton
-                        className={
-                            comment.upVotesBy.includes(authUser.id)
-                                ? "voted"
-                                : ""
-                        }
-                        handleOnClick={
-                            comment.upVotesBy.includes(authUser.id)
-                                ? handleNeutralizeVotes
-                                : handleUpVotesComment
-                        }
-                    >
-                        <AiOutlineArrowUp />
-                    </VoteButton>
+            {authUser === null ? (
+                <div className="thread-item-vote">
+                    <div className="thread-item-vote__buttons">
+                        <span>{comment.upVotesBy.length}</span>
+                        <VoteButton>
+                            <AiOutlineArrowUp />
+                        </VoteButton>
+                    </div>
+                    <div className="thread-item-vote__buttons">
+                        <VoteButton>
+                            <AiOutlineArrowDown />
+                        </VoteButton>
+                        <span>{comment.downVotesBy.length}</span>
+                    </div>
                 </div>
-                <div className="thread-item-vote__buttons">
-                    <VoteButton
-                        className={
-                            comment.downVotesBy.includes(authUser.id)
-                                ? "voted"
-                                : ""
-                        }
-                        handleOnClick={
-                            comment.downVotesBy.includes(authUser.id)
-                                ? handleNeutralizeVotes
-                                : handleDownVotes
-                        }
-                    >
-                        <AiOutlineArrowDown />
-                    </VoteButton>
-                    <span>{comment.downVotesBy.length}</span>
+            ) : (
+                <div className="thread-item-vote">
+                    <div className="thread-item-vote__buttons">
+                        <span>{comment.upVotesBy.length}</span>
+                        <VoteButton
+                            className={
+                                comment.upVotesBy.includes(authUser.id)
+                                    ? "voted"
+                                    : ""
+                            }
+                            handleOnClick={
+                                comment.upVotesBy.includes(authUser.id)
+                                    ? handleNeutralizeVotes
+                                    : handleUpVotesComment
+                            }
+                        >
+                            <AiOutlineArrowUp />
+                        </VoteButton>
+                    </div>
+                    <div className="thread-item-vote__buttons">
+                        <VoteButton
+                            className={
+                                comment.downVotesBy.includes(authUser.id)
+                                    ? "voted"
+                                    : ""
+                            }
+                            handleOnClick={
+                                comment.downVotesBy.includes(authUser.id)
+                                    ? handleNeutralizeVotes
+                                    : handleDownVotes
+                            }
+                        >
+                            <AiOutlineArrowDown />
+                        </VoteButton>
+                        <span>{comment.downVotesBy.length}</span>
+                    </div>
                 </div>
-            </div>
+            )}
             <div className="comment-item-content">
                 <div className="comment-item-content__header">
                     <Avatar image={comment.owner.avatar} />
