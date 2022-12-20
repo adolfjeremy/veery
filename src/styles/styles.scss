@@ -99,9 +99,12 @@ a {
     align-items: center;
     justify-content: center;
     border-right: 1px solid $whiteishBlack;
-    padding: 1.25rem 1.125rem;
+    padding: 0.625rem;
     .voted {
         background-color: $purple;
+    }
+    span {
+        font-size: 0.875rem;
     }
 
     &__buttons {
@@ -112,10 +115,10 @@ a {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 22px;
             color: $white;
-            width: 35px;
-            height: 35px;
+            width: 24px;
+            height: 24px;
             border: none;
             outline: none;
             border-radius: 50%;
