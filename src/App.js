@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ThreadDetailPage from "./pages/ThreadDetailPage";
+import Loading from "./components/Loading";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
 import { asyncPreloadProcess } from "./states/isPreload/action";
 
@@ -29,6 +30,7 @@ function App() {
 
     return (
         <div className="app-container">
+            <Loading />
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
