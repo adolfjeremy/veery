@@ -1,3 +1,4 @@
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
 import { setAuthUserActionCreator } from "../authUser/action";
 
@@ -16,6 +17,7 @@ function receiveUsersActionCreator(users) {
 
 function asyncRegisterUser({ name, email, password }) {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             await api.register({ name, email, password });
             const token = await api.login({ email, password });
@@ -26,6 +28,7 @@ function asyncRegisterUser({ name, email, password }) {
         } catch (error) {
             alert(error.message);
         }
+        dispatch(hideLoading());
     };
 }
 

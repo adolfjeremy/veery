@@ -1,3 +1,4 @@
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
 
 const ActionType = {
@@ -58,27 +59,32 @@ function neutralizeVoteThreadActionCreator({ id, userId }) {
 
 function asyncReceiveThreads() {
     return async (dispatch) => {
+        dispatch(showLoading());
         try {
             const threads = await api.getAllThreads();
             dispatch(receiveThreadsActionCreator(threads));
         } catch (error) {
             alert(error.message);
         }
+        dispatch(hideLoading());
     };
 }
 
 function asyncAddThread({ title, body }) {
     return async (dispatch) => {
+        dispatch(showLoading);
         try {
             const thread = await api.createThread({ title, body });
             dispatch(addThreadActionCreator(thread));
         } catch (error) {
             alert(error.message);
         }
+        dispatch(hideLoading());
     };
 }
 function asyncUpVoteThread(id) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
         const { authUser } = getState();
         dispatch(upVoteThreadActionCreator({ id, userId: authUser.id }));
         try {
@@ -87,11 +93,13 @@ function asyncUpVoteThread(id) {
             alert(error.message);
             dispatch(upVoteThreadActionCreator({ id, userId: authUser.id }));
         }
+        dispatch(hideLoading());
     };
 }
 
 function asyncDownVoteThread(id) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
         const { authUser } = getState();
         dispatch(downVoteThreadActionCreator({ id, userId: authUser.id }));
         try {
@@ -100,11 +108,13 @@ function asyncDownVoteThread(id) {
             alert(error.message);
             dispatch(downVoteThreadActionCreator({ id, userId: authUser.id }));
         }
+        dispatch(hideLoading());
     };
 }
 
 function asyncNeutralizeVoteThread(id) {
     return async (dispatch, getState) => {
+        dispatch(showLoading());
         const { authUser } = getState();
         dispatch(
             neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
@@ -117,6 +127,7 @@ function asyncNeutralizeVoteThread(id) {
                 neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
             );
         }
+        dispatch(hideLoading());
     };
 }
 
