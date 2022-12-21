@@ -104,7 +104,6 @@ function asyncReceiveThreadDetail(threadId) {
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(receiveThreadDetailActionCreator(threadDetail));
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         }
     };
@@ -117,7 +116,6 @@ function asyncUpVoteThreadDetail(id) {
         try {
             await api.upVoteThread(id);
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(
                 upVoteThreadDetailActionCreator({ id, userId: authUser.id })
@@ -135,7 +133,6 @@ function asyncDownVoteThreadDetail(id) {
         try {
             await api.downVoteThread(id);
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(
                 downVoteThreadDetailActionCreator({ id, userId: authUser.id })
@@ -153,7 +150,6 @@ function asyncNeutralizeVoteThreadDetail(id) {
         try {
             await api.neutralizeVoteThread(id);
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(
                 neutralizeVoteThreadDetailActionCreator({
@@ -171,7 +167,6 @@ function asyncAddComment({ threadId, content }) {
             const threadComment = await api.addComment({ threadId, content });
             dispatch(addCommentActionCreator(threadComment));
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         }
     };
@@ -190,7 +185,6 @@ function asyncUpVoteComment({ threadId, commentId }) {
         try {
             await api.upVoteComment({ threadId, commentId });
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         }
     };
@@ -209,7 +203,6 @@ function asyncDownVoteComment({ threadId, commentId }) {
         try {
             await api.downVoteComment({ threadId, commentId });
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         }
     };
@@ -228,7 +221,6 @@ function asyncNeutralizeVoteComment({ threadId, commentId }) {
         try {
             await api.nuetralizeVoteComment({ threadId, commentId });
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         }
     };

@@ -18,6 +18,7 @@
         "react/require-default-props": "off",
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "quotes": ["error", "double"],
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-alert": "off"
     }
 }

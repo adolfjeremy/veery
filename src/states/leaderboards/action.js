@@ -18,8 +18,7 @@ function asyncSetLeaderboard() {
 
             dispatch(receiveLeaderbaordActionCreator(leaderboards));
         } catch (error) {
-            // eslint-disable-next-line no-alert
-            alert("polmed");
+            alert(error.message);
         }
     };
 }

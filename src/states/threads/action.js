@@ -62,8 +62,7 @@ function asyncReceiveThreads() {
             const threads = await api.getAllThreads();
             dispatch(receiveThreadsActionCreator(threads));
         } catch (error) {
-            // eslint-disable-next-line no-alert
-            alert("polmed");
+            alert(error.message);
         }
     };
 }
@@ -74,7 +73,6 @@ function asyncAddThread({ title, body }) {
             const thread = await api.createThread({ title, body });
             dispatch(addThreadActionCreator(thread));
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         }
     };
@@ -86,7 +84,6 @@ function asyncUpVoteThread(id) {
         try {
             await api.upVoteThread(id);
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(upVoteThreadActionCreator({ id, userId: authUser.id }));
         }
@@ -100,7 +97,6 @@ function asyncDownVoteThread(id) {
         try {
             await api.downVoteThread(id);
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(downVoteThreadActionCreator({ id, userId: authUser.id }));
         }
@@ -116,7 +112,6 @@ function asyncNeutralizeVoteThread(id) {
         try {
             await api.neutralizeVoteThread(id);
         } catch (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
             dispatch(
                 neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
