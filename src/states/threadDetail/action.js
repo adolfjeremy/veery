@@ -65,33 +65,30 @@ function addCommentActionCreator(comment) {
     };
 }
 
-function upVoteCommentActionCreator({ threadId, commentId, userId }) {
+function upVoteCommentActionCreator({ commentId, userId }) {
     return {
         type: ActionType.UP_VOTE_COMMENT,
         payload: {
-            threadId,
             commentId,
             userId,
         },
     };
 }
 
-function downVoteCommentActionCreator({ threadId, commentId, userId }) {
+function downVoteCommentActionCreator({ commentId, userId }) {
     return {
         type: ActionType.DOWN_VOTE_COMMENT,
         payload: {
-            threadId,
             commentId,
             userId,
         },
     };
 }
 
-function neutralizeVoteCommentActioCreator({ threadId, commentId, userId }) {
+function neutralizeVoteCommentActioCreator({ commentId, userId }) {
     return {
         type: ActionType.NEUTRALIZE_VOTE_COMMENT,
         payload: {
-            threadId,
             commentId,
             userId,
         },
@@ -189,7 +186,6 @@ function asyncUpVoteComment({ threadId, commentId }) {
         const { authUser } = getState();
         dispatch(
             upVoteCommentActionCreator({
-                threadId,
                 commentId,
                 userId: authUser.id,
             })
@@ -209,7 +205,6 @@ function asyncDownVoteComment({ threadId, commentId }) {
         const { authUser } = getState();
         dispatch(
             downVoteCommentActionCreator({
-                threadId,
                 commentId,
                 userId: authUser.id,
             })
@@ -229,7 +224,6 @@ function asyncNeutralizeVoteComment({ threadId, commentId }) {
         const { authUser } = getState();
         dispatch(
             neutralizeVoteCommentActioCreator({
-                threadId,
                 commentId,
                 userId: authUser.id,
             })
