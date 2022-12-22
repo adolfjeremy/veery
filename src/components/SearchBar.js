@@ -1,6 +1,5 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-// import PropTypes from "prop-types";
 import { FiSearch } from "react-icons/fi";
 
 function SearchBar() {
@@ -23,10 +22,5 @@ function SearchBar() {
         </div>
     );
 }
-
-// SearchBar.propTypes = {
-//     keyword: PropTypes.string,
-//     handleKeywordChange: PropTypes.func.isRequired,
-// };
 
 export default SearchBar;

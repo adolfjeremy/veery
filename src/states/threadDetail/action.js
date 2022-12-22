@@ -105,7 +105,6 @@ function asyncReceiveThreadDetail(threadId) {
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(receiveThreadDetailActionCreator(threadDetail));
         } catch (error) {
-            // eslint-disable-next-line no-console
             alert(error.response.data.message);
         }
         dispatch(hideLoading());

@@ -77,7 +77,6 @@ function HomePage({ signOut }) {
                                 thread.body
                                     .toLowerCase()
                                     .includes(keyword.toLowerCase())
-                            // eslint-disable-next-line function-paren-newline
                         )}
                     />
                 </MainContent>

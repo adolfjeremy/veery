@@ -18,9 +18,6 @@ function LoginPage() {
 
     const onLogin = ({ email, password }) => {
         dispatch(asyncSetAuthUser({ email, password }));
-        if (authUser !== null) {
-            navigate("/");
-        }
     };
 
     if (authUser === null) {

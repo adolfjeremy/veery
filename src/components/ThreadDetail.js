@@ -1,4 +1,3 @@
-/* eslint-disable no-unneeded-ternary */
 import React from "react";
 import parse from "html-react-parser";
 import PropTypes from "prop-types";

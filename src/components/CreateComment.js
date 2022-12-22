@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
-/* eslint-disable react/self-closing-comp */
 import React from "react";
 import PropTypes from "prop-types";
 import useInput from "../hooks/useInput";
