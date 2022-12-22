@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ThreadDetailPage from "./pages/ThreadDetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import Loading from "./components/Loading";
 import Spinner from "./components/Spinner";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
@@ -42,6 +43,7 @@ function App() {
                     path="/threads/:id"
                     element={<ThreadDetailPage signOut={onSignOut} />}
                 />
+                <Route path="/*" element={<NotFoundPage />} />
             </Routes>
         </div>
     );
