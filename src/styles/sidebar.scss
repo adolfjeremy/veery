@@ -6,7 +6,12 @@ aside {
     border-right: 1px solid $whiteishBlack;
     background-color: $blackishWhite;
     position: relative;
-
+    @media (max-width: 992px) {
+        width: 100%;
+        border: none;
+        padding-right: 10%;
+        padding-left: 10%;
+    }
     .leaderboard {
         color: $white;
         display: flex;

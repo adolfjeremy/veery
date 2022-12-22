@@ -5,11 +5,17 @@
     width: 100%;
     height: inherit;
     margin-top: 4.6875rem;
+    @media (max-width: 768px) {
+        padding: 0 1rem;
+    }
     .auth-page-container {
         width: 50%;
         padding: 2rem;
         background-color: $grayishBlue;
         border-radius: 1.25rem;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
         .auth-page__header {
             display: flex;
             align-items: center;
