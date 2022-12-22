@@ -58,6 +58,34 @@ a {
     z-index: 1000;
 }
 
+@keyframes rotate {
+    from {
+        transform: rotate(1deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    background-color: $background;
+    &__circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px dashed $purple;
+        position: relative;
+        animation: rotate 3s linear infinite alternate;
+    }
+}
+
 .avatar {
     width: 35px;
     border-radius: 50%;

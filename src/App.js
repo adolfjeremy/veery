@@ -6,13 +6,14 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ThreadDetailPage from "./pages/ThreadDetailPage";
 import Loading from "./components/Loading";
+import Spinner from "./components/Spinner";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
 import { asyncPreloadProcess } from "./states/isPreload/action";
 
 import "./styles/styles.scss";
 
 function App() {
-    const { isPreload = false } = useSelector((states) => states);
+    const { isPreload = false, spinner } = useSelector((states) => states);
 
     const dispatch = useDispatch();
 
@@ -31,11 +32,13 @@ function App() {
     return (
         <div className="app-container">
             <Loading />
+            {spinner && <Spinner />}
             <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
+                <Route exact path="/login" element={<LoginPage />} />
+                <Route exact path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<HomePage signOut={onSignOut} />} />
                 <Route
+                    exact
                     path="/threads/:id"
                     element={<ThreadDetailPage signOut={onSignOut} />}
                 />

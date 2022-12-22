@@ -1,10 +1,12 @@
 import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { showSpinner, hideSpinner } from "../spinner/action";
 import api from "../../utils/api";
 import { receiveUsersActionCreator } from "../users/action";
 import { receiveThreadsActionCreator } from "../threads/action";
 
 function asyncPopulateUsersAndThreads() {
     return async (dispatch) => {
+        dispatch(showSpinner());
         dispatch(showLoading());
         try {
             const users = await api.getAllUsers();
@@ -16,6 +18,7 @@ function asyncPopulateUsersAndThreads() {
             alert(error.message);
         }
         dispatch(hideLoading());
+        dispatch(hideSpinner());
     };
 }
 
