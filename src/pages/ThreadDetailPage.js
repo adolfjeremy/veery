@@ -71,43 +71,39 @@ function ThreadDetailPage({ signOut }) {
             <main>
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent>
-                    {threadDetail ? (
-                        <div className="thread-detail">
-                            <ThreadDetail
-                                {...threadDetail}
-                                authUser={authUser}
-                                upVote={onUpVote}
-                                downVote={onDownVote}
-                                neutralizeVote={onNeutralizeVote}
+                    <div className="thread-detail">
+                        <ThreadDetail
+                            {...threadDetail}
+                            authUser={authUser}
+                            upVote={onUpVote}
+                            downVote={onDownVote}
+                            neutralizeVote={onNeutralizeVote}
+                        />
+                        {authUser !== null && (
+                            <CreateComment
+                                threadId={threadDetail.id}
+                                addComment={addComment}
                             />
-                            {authUser !== null && (
-                                <CreateComment
-                                    threadId={threadDetail.id}
-                                    addComment={addComment}
-                                />
-                            )}
-                            <div className="comment-container">
-                                <h2>Comment {threadDetail.comments.length}</h2>
-                                <div className="comment-list">
-                                    {threadDetail.comments.map((comment) => (
-                                        <Comment
-                                            threadId={threadDetail.id}
-                                            comment={comment}
-                                            upVotesComment={upVotesComment}
-                                            downVotesComment={downVotesComment}
-                                            authUser={authUser}
-                                            neutralizeVotesComment={
-                                                neutralizeVotesComment
-                                            }
-                                            key={comment.id}
-                                        />
-                                    ))}
-                                </div>
+                        )}
+                        <div className="comment-container">
+                            <h2>Comment {threadDetail.comments.length}</h2>
+                            <div className="comment-list">
+                                {threadDetail.comments.map((comment) => (
+                                    <Comment
+                                        threadId={threadDetail.id}
+                                        comment={comment}
+                                        upVotesComment={upVotesComment}
+                                        downVotesComment={downVotesComment}
+                                        authUser={authUser}
+                                        neutralizeVotesComment={
+                                            neutralizeVotesComment
+                                        }
+                                        key={comment.id}
+                                    />
+                                ))}
                             </div>
                         </div>
-                    ) : (
-                        <p>404 Not Found</p>
-                    )}
+                    </div>
                 </MainContent>
             </main>
         </>
