@@ -6,7 +6,8 @@ import useInput from "../hooks/useInput";
 function RegisterInput({ authUser, addThread }) {
     const [title, onTitleChange, setTitle] = useInput("");
     const [body, onBodyChange, setBody] = useInput("");
-    const onHandleAddThread = () => {
+    const onHandleAddThread = (e) => {
+        e.preventDefault();
         addThread({ title, body });
         setTitle("");
         setBody("");

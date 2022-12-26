@@ -5,12 +5,13 @@ import useInput from "../hooks/useInput";
 function LoginInput({ login }) {
     const [email, onEmailChange] = useInput("");
     const [password, onPasswordChange] = useInput("");
+    const onHandleLogin = (e) => {
+        e.preventDefault();
+        login({ email, password });
+    };
 
     return (
-        <form
-            className="auth-input"
-            onSubmit={() => login({ email, password })}
-        >
+        <form className="auth-input" onSubmit={onHandleLogin}>
             <input
                 type="email"
                 value={email}

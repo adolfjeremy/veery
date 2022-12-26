@@ -6,12 +6,13 @@ function RegisterInput({ register }) {
     const [name, onNameChange] = useInput("");
     const [email, onEmailChange] = useInput("");
     const [password, onPasswordChange] = useInput("");
+    const onHandleRegister = (e) => {
+        e.preventDefault();
+        register({ name, email, password });
+    };
 
     return (
-        <form
-            className="auth-input"
-            onSubmit={() => register({ name, email, password })}
-        >
+        <form className="auth-input" onSubmit={onHandleRegister}>
             <input
                 type="text"
                 value={name}
