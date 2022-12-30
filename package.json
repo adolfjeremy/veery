@@ -23,6 +23,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "test": "react-scripts test",
         "lint": "eslint ./src",
         "ci:test": "react-scripts test --watchAll=false && start-server-and-test start http-get://0.0.0.0:3000 e2e"
     },
