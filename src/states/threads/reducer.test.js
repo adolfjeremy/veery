@@ -126,19 +126,18 @@ describe("threadsReducer function", () => {
         expect(nextState).toEqual([
             {
                 ...initialState[0],
-                upVotesBy: [
-                    ...initialState[0].upVotesBy,
-                    action.payload.userId,
-                ],
-                downVotesBy: [
-                    ...(initialState[0].downVotesBy.includes(
-                        action.payload.userId
-                    )
-                        ? initialState[0].downVotesBy.filter(
-                              (id) => id !== action.payload.userId
-                          )
-                        : initialState[0].downVotesBy),
-                ],
+                upVotesBy: initialState[0].upVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? initialState[0].upVotesBy
+                    : initialState[0].upVotesBy.concat([action.payload.userId]),
+                downVotesBy: initialState[0].downVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? initialState[0].downVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : initialState[0].downVotesBy,
             },
         ]);
     });
@@ -171,19 +170,20 @@ describe("threadsReducer function", () => {
         expect(nextState).toEqual([
             {
                 ...initialState[0],
-                downVotesBy: [
-                    ...initialState[0].downVotesBy,
-                    action.payload.userId,
-                ],
-                upVotesBy: [
-                    ...(initialState[0].upVotesBy.includes(
-                        action.payload.userId
-                    )
-                        ? initialState[0].upVotesBy.filter(
-                              (id) => id !== action.payload.userId
-                          )
-                        : initialState[0].upVotesBy),
-                ],
+                upVotesBy: initialState[0].upVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? initialState[0].upVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : initialState[0].upVotesBy,
+                downVotesBy: initialState[0].downVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? initialState[0].downVotesBy
+                    : initialState[0].downVotesBy.concat([
+                          action.payload.userId,
+                      ]),
             },
         ]);
     });
@@ -216,24 +216,20 @@ describe("threadsReducer function", () => {
         expect(nextState).toEqual([
             {
                 ...initialState[0],
-                upVotesBy: [
-                    ...(initialState[0].upVotesBy.includes(
-                        action.payload.userId
-                    )
-                        ? initialState[0].upVotesBy.filter(
-                              (id) => id !== action.payload.userId
-                          )
-                        : initialState[0].upVotesBy),
-                ],
-                downVotesBy: [
-                    ...(initialState[0].downVotesBy.includes(
-                        action.payload.userId
-                    )
-                        ? initialState[0].downVotesBy.filter(
-                              (id) => id !== action.payload.userId
-                          )
-                        : initialState[0].downVotesBy),
-                ],
+                upVotesBy: initialState[0].upVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? initialState[0].upVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : initialState[0].upVotesBy,
+                downVotesBy: initialState[0].downVotesBy.includes(
+                    action.payload.userId
+                )
+                    ? initialState[0].downVotesBy.filter(
+                          (id) => id !== action.payload.userId
+                      )
+                    : initialState[0].downVotesBy,
             },
         ]);
     });
