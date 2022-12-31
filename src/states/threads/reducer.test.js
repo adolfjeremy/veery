@@ -152,12 +152,7 @@ describe("threadsReducer function", () => {
             },
         ]);
 
-        expect(nextState3).toEqual([
-            {
-                ...nextState[0],
-                upVotesBy: [action.payload.userId],
-            },
-        ]);
+        expect(nextState3).toEqual(nextState2);
     });
 
     it("should return the threads with the downvoted thread when given by DOWN_VOTE_THREAD", () => {
@@ -215,13 +210,7 @@ describe("threadsReducer function", () => {
             },
         ]);
 
-        expect(nextState3).toEqual([
-            {
-                ...nextState[0],
-                upVotesBy: [],
-                downVotesBy: [action.payload.userId],
-            },
-        ]);
+        expect(nextState3).toEqual(nextState2);
     });
 
     it("should return the threads without the downvoted/upvoted thread when given by NEUTRALIZE_VOTE_THREAD", () => {
@@ -279,12 +268,6 @@ describe("threadsReducer function", () => {
                 downVotesBy: [],
             },
         ]);
-        expect(nextState3).toEqual([
-            {
-                ...nextState[0],
-                upVotesBy: [],
-                downVotesBy: [],
-            },
-        ]);
+        expect(nextState3).toEqual(nextState2);
     });
 });
