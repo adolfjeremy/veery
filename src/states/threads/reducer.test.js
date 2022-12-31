@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import threadsReducer from "./reducer";
 
 /**
@@ -108,7 +107,20 @@ describe("threadsReducer function", () => {
                 createdAt: "2021-06-21T07:00:00.000Z",
                 ownerId: "users-1",
                 upVotesBy: [],
-                downVotesBy: ["user-2"],
+                downVotesBy: [],
+                totalComments: 0,
+            },
+        ];
+        const initialState2 = [
+            {
+                id: "thread-1",
+                title: "Thread Pertama",
+                body: "Ini adalah thread pertama",
+                category: "General",
+                createdAt: "2021-06-21T07:00:00.000Z",
+                ownerId: "users-1",
+                upVotesBy: [],
+                downVotesBy: ["users-2"],
                 totalComments: 0,
             },
         ];
@@ -117,27 +129,33 @@ describe("threadsReducer function", () => {
             type: "UP_VOTE_THREAD",
             payload: {
                 id: "thread-1",
-                userId: "user-2",
+                userId: "users-2",
             },
         };
 
         const nextState = threadsReducer(initialState, action);
+        const nextState2 = threadsReducer(initialState2, action);
+        const nextState3 = threadsReducer(nextState, action);
 
         expect(nextState).toEqual([
             {
                 ...initialState[0],
-                upVotesBy: initialState[0].upVotesBy.includes(
-                    action.payload.userId
-                )
-                    ? initialState[0].upVotesBy
-                    : initialState[0].upVotesBy.concat([action.payload.userId]),
-                downVotesBy: initialState[0].downVotesBy.includes(
-                    action.payload.userId
-                )
-                    ? initialState[0].downVotesBy.filter(
-                          (id) => id !== action.payload.userId
-                      )
-                    : initialState[0].downVotesBy,
+                upVotesBy: [action.payload.userId],
+            },
+        ]);
+
+        expect(nextState2).toEqual([
+            {
+                ...initialState2[0],
+                upVotesBy: [action.payload.userId],
+                downVotesBy: [],
+            },
+        ]);
+
+        expect(nextState3).toEqual([
+            {
+                ...nextState[0],
+                upVotesBy: [action.payload.userId],
             },
         ]);
     });
@@ -151,7 +169,20 @@ describe("threadsReducer function", () => {
                 category: "General",
                 createdAt: "2021-06-21T07:00:00.000Z",
                 ownerId: "users-1",
-                upVotesBy: ["user-2"],
+                upVotesBy: [],
+                downVotesBy: [],
+                totalComments: 0,
+            },
+        ];
+        const initialState2 = [
+            {
+                id: "thread-1",
+                title: "Thread Pertama",
+                body: "Ini adalah thread pertama",
+                category: "General",
+                createdAt: "2021-06-21T07:00:00.000Z",
+                ownerId: "users-1",
+                upVotesBy: ["users-2"],
                 downVotesBy: [],
                 totalComments: 0,
             },
@@ -161,29 +192,34 @@ describe("threadsReducer function", () => {
             type: "DOWN_VOTE_THREAD",
             payload: {
                 id: "thread-1",
-                userId: "user-2",
+                userId: "users-2",
             },
         };
 
         const nextState = threadsReducer(initialState, action);
+        const nextState2 = threadsReducer(initialState2, action);
+        const nextState3 = threadsReducer(nextState, action);
 
         expect(nextState).toEqual([
             {
                 ...initialState[0],
-                upVotesBy: initialState[0].upVotesBy.includes(
-                    action.payload.userId
-                )
-                    ? initialState[0].upVotesBy.filter(
-                          (id) => id !== action.payload.userId
-                      )
-                    : initialState[0].upVotesBy,
-                downVotesBy: initialState[0].downVotesBy.includes(
-                    action.payload.userId
-                )
-                    ? initialState[0].downVotesBy
-                    : initialState[0].downVotesBy.concat([
-                          action.payload.userId,
-                      ]),
+                downVotesBy: [action.payload.userId],
+            },
+        ]);
+
+        expect(nextState2).toEqual([
+            {
+                ...initialState2[0],
+                upVotesBy: [],
+                downVotesBy: [action.payload.userId],
+            },
+        ]);
+
+        expect(nextState3).toEqual([
+            {
+                ...nextState[0],
+                upVotesBy: [],
+                downVotesBy: [action.payload.userId],
             },
         ]);
     });
@@ -203,6 +239,20 @@ describe("threadsReducer function", () => {
             },
         ];
 
+        const initialState2 = [
+            {
+                id: "thread-1",
+                title: "Thread Pertama",
+                body: "Ini adalah thread pertama",
+                category: "General",
+                createdAt: "2021-06-21T07:00:00.000Z",
+                ownerId: "users-1",
+                upVotesBy: ["user-2"],
+                downVotesBy: [],
+                totalComments: 0,
+            },
+        ];
+
         const action = {
             type: "NEUTRALIZE_VOTE_THREAD",
             payload: {
@@ -212,24 +262,28 @@ describe("threadsReducer function", () => {
         };
 
         const nextState = threadsReducer(initialState, action);
+        const nextState2 = threadsReducer(initialState2, action);
+        const nextState3 = threadsReducer(initialState, action);
 
         expect(nextState).toEqual([
             {
                 ...initialState[0],
-                upVotesBy: initialState[0].upVotesBy.includes(
-                    action.payload.userId
-                )
-                    ? initialState[0].upVotesBy.filter(
-                          (id) => id !== action.payload.userId
-                      )
-                    : initialState[0].upVotesBy,
-                downVotesBy: initialState[0].downVotesBy.includes(
-                    action.payload.userId
-                )
-                    ? initialState[0].downVotesBy.filter(
-                          (id) => id !== action.payload.userId
-                      )
-                    : initialState[0].downVotesBy,
+                upVotesBy: [],
+                downVotesBy: [],
+            },
+        ]);
+        expect(nextState2).toEqual([
+            {
+                ...initialState[0],
+                upVotesBy: [],
+                downVotesBy: [],
+            },
+        ]);
+        expect(nextState3).toEqual([
+            {
+                ...nextState[0],
+                upVotesBy: [],
+                downVotesBy: [],
             },
         ]);
     });
