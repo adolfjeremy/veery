@@ -103,6 +103,7 @@ const api = (() => {
 
         return threads;
     }
+
     async function createThread({ title, body }) {
         const { data } = await axios.post(
             `${BASE_URL}/threads`,
