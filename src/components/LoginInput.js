@@ -17,14 +17,12 @@ function LoginInput({ login }) {
                 value={email}
                 onChange={onEmailChange}
                 placeholder="Email"
-                required
             />
             <input
                 type="password"
                 value={password}
                 onChange={onPasswordChange}
                 placeholder="Password"
-                required
             />
             <button type="submit">Sign In</button>
         </form>
