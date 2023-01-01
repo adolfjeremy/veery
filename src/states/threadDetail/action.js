@@ -105,7 +105,7 @@ function asyncReceiveThreadDetail(threadId) {
             const threadDetail = await api.getThreadDetail(threadId);
             dispatch(receiveThreadDetailActionCreator(threadDetail));
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
         dispatch(spinnerActionCreator(false));
@@ -120,7 +120,7 @@ function asyncUpVoteThreadDetail(id) {
         try {
             await api.upVoteThread(id);
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
             dispatch(
                 upVoteThreadDetailActionCreator({ id, userId: authUser.id })
             );
@@ -139,7 +139,7 @@ function asyncDownVoteThreadDetail(id) {
         try {
             await api.downVoteThread(id);
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
             dispatch(
                 downVoteThreadDetailActionCreator({ id, userId: authUser.id })
             );
@@ -158,7 +158,7 @@ function asyncNeutralizeVoteThreadDetail(id) {
         try {
             await api.neutralizeVoteThread(id);
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
             dispatch(
                 neutralizeVoteThreadDetailActionCreator({
                     id,
@@ -177,7 +177,7 @@ function asyncAddComment({ threadId, content }) {
             const threadComment = await api.addComment({ threadId, content });
             dispatch(addCommentActionCreator(threadComment));
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };
@@ -196,7 +196,7 @@ function asyncUpVoteComment({ threadId, commentId }) {
         try {
             await api.upVoteComment({ threadId, commentId });
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };
@@ -215,7 +215,7 @@ function asyncDownVoteComment({ threadId, commentId }) {
         try {
             await api.downVoteComment({ threadId, commentId });
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };
@@ -234,7 +234,7 @@ function asyncNeutralizeVoteComment({ threadId, commentId }) {
         try {
             await api.nuetralizeVoteComment({ threadId, commentId });
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };

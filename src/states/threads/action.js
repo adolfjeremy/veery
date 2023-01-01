@@ -64,7 +64,7 @@ function asyncAddThread({ title, body }) {
             const thread = await api.createThread({ title, body });
             dispatch(addThreadActionCreator(thread));
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };
@@ -77,7 +77,7 @@ function asyncUpVoteThread(id) {
         try {
             await api.upVoteThread(id);
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
             dispatch(upVoteThreadActionCreator({ id, userId: authUser.id }));
         }
         dispatch(hideLoading());
@@ -92,7 +92,7 @@ function asyncDownVoteThread(id) {
         try {
             await api.downVoteThread(id);
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
             dispatch(downVoteThreadActionCreator({ id, userId: authUser.id }));
         }
         dispatch(hideLoading());
@@ -109,7 +109,7 @@ function asyncNeutralizeVoteThread(id) {
         try {
             await api.neutralizeVoteThread(id);
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
             dispatch(
                 neutralizeVoteThreadActionCreator({ id, userId: authUser.id })
             );

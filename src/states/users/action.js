@@ -26,7 +26,7 @@ function asyncRegisterUser({ name, email, password }) {
 
             dispatch(setAuthUserActionCreator(authUser));
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };
