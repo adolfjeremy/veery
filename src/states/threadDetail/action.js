@@ -1,5 +1,5 @@
 import { showLoading, hideLoading } from "react-redux-loading-bar";
-import { showSpinner, hideSpinner } from "../spinner/action";
+import { spinnerActionCreator } from "../spinner/action";
 import api from "../../utils/api";
 
 const ActionType = {
@@ -98,7 +98,7 @@ function neutralizeVoteCommentActioCreator({ commentId, userId }) {
 
 function asyncReceiveThreadDetail(threadId) {
     return async (dispatch) => {
-        dispatch(showSpinner());
+        dispatch(spinnerActionCreator(true));
         dispatch(showLoading());
         dispatch(clearThreadDetailActionCreator());
         try {
@@ -108,7 +108,7 @@ function asyncReceiveThreadDetail(threadId) {
             alert(error.response.data.message);
         }
         dispatch(hideLoading());
-        dispatch(hideSpinner());
+        dispatch(spinnerActionCreator(false));
     };
 }
 
