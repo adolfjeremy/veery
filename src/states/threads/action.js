@@ -57,19 +57,6 @@ function neutralizeVoteThreadActionCreator({ id, userId }) {
     };
 }
 
-function asyncReceiveThreads() {
-    return async (dispatch) => {
-        dispatch(showLoading());
-        try {
-            const threads = await api.getAllThreads();
-            dispatch(receiveThreadsActionCreator(threads));
-        } catch (error) {
-            alert(error.response.data.message);
-        }
-        dispatch(hideLoading());
-    };
-}
-
 function asyncAddThread({ title, body }) {
     return async (dispatch) => {
         dispatch(showLoading);
@@ -138,7 +125,6 @@ export {
     upVoteThreadActionCreator,
     downVoteThreadActionCreator,
     neutralizeVoteThreadActionCreator,
-    asyncReceiveThreads,
     asyncAddThread,
     asyncUpVoteThread,
     asyncDownVoteThread,
