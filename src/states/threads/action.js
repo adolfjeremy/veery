@@ -59,7 +59,7 @@ function neutralizeVoteThreadActionCreator({ id, userId }) {
 
 function asyncAddThread({ title, body }) {
     return async (dispatch) => {
-        dispatch(showLoading);
+        dispatch(showLoading());
         try {
             const thread = await api.createThread({ title, body });
             dispatch(addThreadActionCreator(thread));
