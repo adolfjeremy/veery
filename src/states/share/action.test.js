@@ -54,6 +54,8 @@ const fakeThreadsResponse = [
     },
 ];
 
+const fakeErrorResponse = new Error("Ups, something went wrong");
+
 describe("asyncPopulateUsersAndThreads thunk", () => {
     beforeEach(() => {
         api._getAllUsers = api.getAllUsers;
@@ -83,6 +85,22 @@ describe("asyncPopulateUsersAndThreads thunk", () => {
         expect(dispatch).toHaveBeenCalledWith(
             receiveThreadsActionCreator(fakeThreadsResponse)
         );
+        expect(dispatch).toHaveBeenCalledWith(hideLoading());
+        expect(dispatch).toHaveBeenCalledWith(spinnerActionCreator(false));
+    });
+
+    it("should dispatch action and call alert correctly when data fetching failed", async () => {
+        api.getAllUsers = () => Promise.reject(fakeErrorResponse);
+        api.getAllThreads = () => Promise.reject(fakeErrorResponse);
+
+        const dispatch = jest.fn();
+        window.alert = jest.fn();
+
+        await asyncPopulateUsersAndThreads()(dispatch);
+
+        expect(dispatch).toHaveBeenCalledWith(spinnerActionCreator(true));
+        expect(dispatch).toHaveBeenCalledWith(showLoading());
+        expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
         expect(dispatch).toHaveBeenCalledWith(hideLoading());
         expect(dispatch).toHaveBeenCalledWith(spinnerActionCreator(false));
     });
