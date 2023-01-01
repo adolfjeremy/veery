@@ -24,7 +24,7 @@ function HeaderBar({ authUser, signOut }) {
                 <div className="auth-user-info">
                     <Avatar image={authUser.avatar} />
                     <span>{authUser.name}</span>
-                    <button type="button" onClick={signOut}>
+                    <button type="button" title="Sign Out" onClick={signOut}>
                         <VscSignOut />
                     </button>
                 </div>
