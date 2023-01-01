@@ -20,7 +20,7 @@ function asyncSetLeaderboard() {
 
             dispatch(receiveLeaderbaordActionCreator(leaderboards));
         } catch (error) {
-            alert(error.response.data.message);
+            alert(error.message);
         }
         dispatch(hideLoading());
     };
