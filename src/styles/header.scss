@@ -38,24 +38,7 @@ header {
     .auth-button-container {
         display: flex;
         align-items: center;
-
-        .authbutton {
-            font-size: 0.875rem;
-            font-weight: 600;
-            padding: 0.625rem 1rem;
-            border-radius: 20px;
-        }
-
-        .login {
-            background-color: $purple;
-            margin-right: 0.9375rem;
-            color: $white;
-        }
-
-        .register {
-            background-color: $white;
-            color: $background;
-        }
+        gap: 0.9375rem;
     }
     .auth-user-info {
         display: flex;

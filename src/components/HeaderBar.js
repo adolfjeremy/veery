@@ -13,12 +13,16 @@ function HeaderBar({ authUser, signOut }) {
             <SearchBar />
             {authUser === null ? (
                 <div className="auth-button-container">
-                    <AuthButton destination="/login" className="login">
-                        Sign In
-                    </AuthButton>
-                    <AuthButton destination="/register" className="register">
-                        Sign Up
-                    </AuthButton>
+                    <AuthButton
+                        destination="/login"
+                        type="purple"
+                        content="Sign In"
+                    />
+                    <AuthButton
+                        destination="/register"
+                        type="white"
+                        content="Sign Up"
+                    />
                 </div>
             ) : (
                 <div className="auth-user-info">
