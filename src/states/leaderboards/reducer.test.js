@@ -1,11 +1,11 @@
-import leaderboardReducer from "./reducer";
-
 /**
  * test scenario for users reducer
  * - leaderboardReducer
  *  - should return the initial state when given by unknown action
  *  - should return the users when given by SET_LEADERBOARDS action
  */
+
+import leaderboardReducer from "./reducer";
 
 describe("leaderboardReducer function", () => {
     it("should return the initial state when given by unknown action", () => {

@@ -1,5 +1,3 @@
-import threadsReducer from "./reducer";
-
 /**
  * test scenario for threads reducer
  * - threadsReducer
@@ -11,6 +9,8 @@ import threadsReducer from "./reducer";
  *  - should return the threads without the downvoted/upvoted
  *    thread when given by NEUTRALIZE_VOTE_THREAD
  */
+
+import threadsReducer from "./reducer";
 
 describe("threadsReducer function", () => {
     it("should return the initial state when given by unknown action", () => {

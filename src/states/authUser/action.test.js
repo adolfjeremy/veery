@@ -1,7 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import { hideLoading, showLoading } from "react-redux-loading-bar";
-import api from "../../utils/api";
-import { asyncSetAuthUser, setAuthUserActionCreator } from "./action";
 
 /**
  * skenario test
@@ -10,6 +7,11 @@ import { asyncSetAuthUser, setAuthUserActionCreator } from "./action";
  *  - should dispatch action correctly when data fetching success
  *  - should dispatch action and call alert correctly when data fetching failed
  */
+
+import { hideLoading, showLoading } from "react-redux-loading-bar";
+import api from "../../utils/api";
+import { asyncSetAuthUser, setAuthUserActionCreator } from "./action";
+
 const fakeTokenResponse = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
 
 const fakeOwnUserResponse = {

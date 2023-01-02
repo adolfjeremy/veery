@@ -1,5 +1,4 @@
 /* eslint-disable indent */
-import threadDetailReducer from "./reducer";
 
 /**
  * test scenario for threads reducer
@@ -18,6 +17,8 @@ import threadDetailReducer from "./reducer";
  *  - should return the thread detail without downvoted/upvoted comment
  *    when given by NEUTRALIZE_VOTE_COMMENT action
  */
+
+import threadDetailReducer from "./reducer";
 
 describe("threadDetailReducer function", () => {
     it("should return the initial state when given by unknown action", () => {

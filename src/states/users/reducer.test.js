@@ -1,11 +1,11 @@
-import usersReducer from "./reducer";
-
 /**
  * test scenario for users reducer
  * - threadsReducer
  *  - should return the initial state when given by unknown action
  *  - should return the users when given by RECEIVE_USER action
  */
+
+import usersReducer from "./reducer";
 
 describe("usersReducer function", () => {
     it("should return the initial state when given by unknown action", () => {

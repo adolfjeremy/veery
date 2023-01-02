@@ -1,10 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import { hideLoading, showLoading } from "react-redux-loading-bar";
-import api from "../../utils/api";
-import { spinnerActionCreator } from "../spinner/action";
-import { receiveThreadsActionCreator } from "../threads/action";
-import { receiveUsersActionCreator } from "../users/action";
-import asyncPopulateUsersAndThreads from "./action";
 
 /**
  * skenario test
@@ -13,6 +7,12 @@ import asyncPopulateUsersAndThreads from "./action";
  *  - should dispatch action correctly when data fetching success
  *  - should dispatch action and call alert correctly when data fetching failed
  */
+import { hideLoading, showLoading } from "react-redux-loading-bar";
+import api from "../../utils/api";
+import { spinnerActionCreator } from "../spinner/action";
+import { receiveThreadsActionCreator } from "../threads/action";
+import { receiveUsersActionCreator } from "../users/action";
+import asyncPopulateUsersAndThreads from "./action";
 
 const fakeUsersResponse = [
     {
