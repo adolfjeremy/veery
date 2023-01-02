@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import HeaderBar from "../components/HeaderBar";
+import Main from "../components/styled/Main";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import CreateThreadInput from "../components/CreateThreadInput";
@@ -55,7 +56,7 @@ function HomePage({ signOut }) {
     return (
         <>
             <HeaderBar authUser={authUser} signOut={signOut} />
-            <main>
+            <Main>
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent>
                     <CreateThreadInput
@@ -80,7 +81,7 @@ function HomePage({ signOut }) {
                         )}
                     />
                 </MainContent>
-            </main>
+            </Main>
         </>
     );
 }

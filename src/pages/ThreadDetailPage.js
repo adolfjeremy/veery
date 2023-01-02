@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import NotFoundPage from "./NotFoundPage";
 import HeaderBar from "../components/HeaderBar";
+import Main from "../components/styled/Main";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import ThreadDetail from "../components/ThreadDetail";
@@ -67,7 +68,7 @@ function ThreadDetailPage({ signOut }) {
     return (
         <>
             <HeaderBar authUser={authUser} signOut={signOut} />
-            <main>
+            <Main>
                 <Sidebar leaderboards={leaderboards} />
                 <MainContent>
                     <div className="thread-detail">
@@ -104,7 +105,7 @@ function ThreadDetailPage({ signOut }) {
                         </div>
                     </div>
                 </MainContent>
-            </main>
+            </Main>
         </>
     );
 }

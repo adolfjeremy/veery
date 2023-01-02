@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Main from "../components/styled/Main";
 import RegisterInput from "../components/RegisterInput";
 import AppLogo from "../components/AppLogo";
 import { asyncRegisterUser } from "../states/users/action";
@@ -22,7 +23,7 @@ function RegisterPage() {
     };
     if (authUser === null) {
         return (
-            <main>
+            <Main>
                 <div className="auth-page">
                     <div className="auth-page-container">
                         <div className="auth-page__header">
@@ -40,7 +41,7 @@ function RegisterPage() {
                         </div>
                     </div>
                 </div>
-            </main>
+            </Main>
         );
     }
     return null;
