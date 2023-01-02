@@ -6,7 +6,7 @@ function LeaderboardItem({ user, score }) {
     return (
         <div className="leaderboard-item">
             <div className="leaderboard-item__user-info">
-                <Avatar image={user.avatar} />
+                <Avatar image={user.avatar} type="md" />
                 <h3>{user.name}</h3>
             </div>
             <p>{score}</p>

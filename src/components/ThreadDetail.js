@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import PropTypes from "prop-types";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import VoteButton from "./VoteButton";
-import AvatarSmall from "./AvatarSmall";
+import Avatar from "./Avatar";
 import postedAt from "../utils";
 import { authUserShape } from "./HeaderBar";
 
@@ -88,7 +88,7 @@ function ThreadDetail({
                     <h3>{title}</h3>
                     <span>
                         {/* eslint-disable react/jsx-one-expression-per-line */}
-                        posted by <AvatarSmall image={owner.avatar} />
+                        posted by <Avatar image={owner.avatar} type="sm" />
                         <strong>{owner.name} </strong> {postedAt(createdAt)}
                     </span>
                 </div>

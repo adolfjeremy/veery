@@ -81,7 +81,7 @@ function Comment({
             )}
             <div className="comment-item-content">
                 <div className="comment-item-content__header">
-                    <Avatar image={comment.owner.avatar} />
+                    <Avatar image={comment.owner.avatar} type="md" />
                     <span className="username">{comment.owner.name}</span>
                     <span>{postedAt(comment.createdAt)}</span>
                 </div>
